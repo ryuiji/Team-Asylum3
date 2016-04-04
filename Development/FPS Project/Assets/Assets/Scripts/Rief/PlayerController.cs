@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour {
     public CharacterController cc;
     private Vector3 movement;
     private float walking;
-    private float moveSpeed = 4f;
-    private float runSpeed = 8f;
-    private float rotateSpeed = 4f;
+    public float moveSpeed = 4f;
+    public float runSpeed = 8f;
+    public float rotateSpeed = 4f;
     private float jumpForce = 7f;
     private float gravity = 10f;
     public Vector3 tempRotation;
