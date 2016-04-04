@@ -30,7 +30,7 @@ public class RangedEnemy : EnemyAbstract
                 }
             }
         }
-        else if (aggrod == true)
+        else if (aggrod == true) 
         {
             if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
             {
