@@ -1,0 +1,32 @@
+In je eigen project en scene in Unity, importeer je jouw model, en textures.
+Eerst maak je een mapje in Unity (In je folder list, rechtermuisknop, new, folder). Geef deze de naam van je model.
+In dit mapje, maak je 3 nieuwe mapjes.
+1. Textures
+2. Model
+3. Prefab
+
+1. Hier stop je al je textures en materials in die bij dat model horen.
+2. Hier stop je je .fbx bestand in van je model.
+
+Sleep je .fbx in je scene, check je schaal en apply al je textures op je model.
+Zorg dat je materials en textures ALLEMAAL in het Texture mapje zitten, anders krijgen wij problemen met importeren.
+Wanneer je alle textures op je model hebt gesleept, kun je een prefab maken.
+Dit doe je door linksboven je model te selecteren, en hem in de juiste folder te slepen.
+Als dit gelukt is, doe je rechtermuisknop op je eerste folder die je hebt gemaakt, en doe je export package.
+Zorg dat de optie "exclude dependencies" aanstaat.
+
+Controleer dan even of het volgende in beeld staat:
+-Je mapje met de naam van je model.
+	-Hierin 3 mapjes, texture, model en prefab.
+		-Hierin je textures/materials, je .fbx, en je prefab
+
+ZORG DAT JE JE PACKAGE OP JE EIGEN PC STAAT. ALS JE DIT HEBT GEDAAN, MAAK JE EEN KOPIE VAN JE PACKAGE.
+Deze kopie kan je kwijt in de artist map.
+\Documents\GitHub\FPS\Artist\Assets
+
+Items bij items, en objects bij objects. Stel dat we een weaponrack hebben.
+Dit is een object, dus je package gaat in de map Objects > Model. Hierin maak je dan een mapje met WeaponRack, en daar gooi je je package in. Je pad zal er ongeveer zo uitzien:
+Documents\GitHub\FPS\Artist\Assets\Objects\2.Model\WeaponRack
+
+
+Lukt dit niet, geef ff een gil en ik kom je helpen (Robin)

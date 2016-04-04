@@ -1,0 +1,17 @@
+- 3ds max unit space = meters.
+
+- geen Ngons
+
+- Art style consistent houden
+
+- regelmatig saven en maak meerdere save files.
+
+- Altijd referentie model gebruiken om scaling consistent te houden
+
+- Bij exporteren naar fbx file embedmedia aanvinken (mits je de texture niet inbegrepen wil hebben)
+
+- Asset is pas klaar als het een  volledig functionele prefab is in unity (controleer/test)
+
+- prefabs opslaan in FPS/Assets/.....
+
+ 
