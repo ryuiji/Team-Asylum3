@@ -6,13 +6,16 @@ public class Hallicunation : MonoBehaviour
 {
     public Sprite[] hallicunation1Images;
     public AudioClip hallicunation1ScreamSound, hallicunationPantSound;
+    public CanvasGroup hallicunation1CanvasGroup;
+    public AudioSource audioSourceHall1;
     public CanvasGroup blackOut;
     public PlayerController controller;
+    public Gunmanage gunManager;
 
     // Use this for initialization
     void Start()
     {
-        StartCoroutine("HallicunationOne",GetComponent<CanvasGroup>());
+        StartCoroutine("HallicunationOne", hallicunation1CanvasGroup);
     }
 
     // Update is called once per frame
@@ -56,7 +59,8 @@ public class Hallicunation : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
         }
-        GetComponent<AudioSource>().PlayOneShot(hallicunation1ScreamSound);
+        gunManager.enabled = false;
+        audioSourceHall1.PlayOneShot(hallicunation1ScreamSound);
         while (canvasgroup.alpha < 1f)
         {
             canvasgroup.transform.localScale+=new Vector3(0.5f,0.5f,0.5f);
@@ -67,19 +71,26 @@ public class Hallicunation : MonoBehaviour
 
         GetComponent<AudioSource>().Stop();
         yield return new WaitForSeconds(1f);
-        GetComponent<AudioSource>().PlayOneShot(hallicunationPantSound);
-        controller.rotateSpeed=1f;
+        StartCoroutine("Blackout",canvasgroup);
+        
+    }
+
+    public IEnumerator Blackout(CanvasGroup canvasGroup)
+    {
+        gunManager.enabled=false;
+        audioSourceHall1.PlayOneShot(hallicunationPantSound);
+        controller.rotateSpeed = 1f;
         controller.moveSpeed = 1f;
         controller.runSpeed = 2f;
-        canvasgroup.alpha=0;
+        canvasGroup.alpha = 0;
         while (blackOut.alpha < 1f)
         {
             FadeImageIn(blackOut, 1f);
             yield return new WaitForSeconds(0.01f);
         }
-        for (int i2 = 0; i2<2; i2++)
+        for (int i2 = 0; i2 < 2; i2++)
         {
-            while(blackOut.alpha>0.5f)
+            while (blackOut.alpha > 0.5f)
             {
                 FadeImageOut(blackOut, 1f);
                 yield return new WaitForSeconds(0.01f);
@@ -90,7 +101,7 @@ public class Hallicunation : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
         }
-        while (blackOut.alpha >0f)
+        while (blackOut.alpha > 0f)
         {
             FadeImageOut(blackOut, 1);
             yield return new WaitForSeconds(0.01f);
@@ -98,7 +109,6 @@ public class Hallicunation : MonoBehaviour
         controller.rotateSpeed = 4f;
         controller.moveSpeed = 4f;
         controller.runSpeed = 8f;
-        print("Yarak");
-        
+        gunManager.enabled = true;
     }
 }
