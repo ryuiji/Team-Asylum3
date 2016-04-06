@@ -12,10 +12,11 @@ public class MenuManager : MonoBehaviour {
 	public GameObject[] allMenus;
 	private bool showMenu = true;
 	private bool showOptions = true;
-	public bool canOpen;
+	public bool canOpen = true;
 
 	void Awake () {
 		Cursor.visible = false;
+		canOpen = true;
 	}
 
 	void GetInput () {
@@ -68,5 +69,6 @@ public class MenuManager : MonoBehaviour {
 
 	void Update () {
 		GetInput();
+		print(canOpen);
 	}
 }
