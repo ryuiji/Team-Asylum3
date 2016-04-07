@@ -85,7 +85,7 @@ public class Inspect : MonoBehaviour {
 		inspecting = false;
 		Cursor.visible = false;
 		EnableMovement();
-		SetObjectToldLocation();		
+		SetObjectToOldLocation();		
 		inspectCanvas.SetActive(false);
 		menuManager.GetComponent<MenuManager>().canOpen = true;
 	}
@@ -95,7 +95,7 @@ public class Inspect : MonoBehaviour {
 		hit.transform.position = tempPosition.position;
 	}
 
-	void SetObjectToldLocation () {
+	void SetObjectToOldLocation () {
 		Transform transform = hit.transform;
 		transform.gameObject.layer = 0;
 		transform.position = oldPosition;

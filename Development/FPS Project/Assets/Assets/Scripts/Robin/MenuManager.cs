@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour {
 	public GameObject[] allMenus;
 	private bool showMenu = true;
 	private bool showOptions = true;
-	public bool canOpen = true;
+	public bool canOpen;
 
 	void Awake () {
 		Cursor.visible = false;
@@ -69,6 +69,5 @@ public class MenuManager : MonoBehaviour {
 
 	void Update () {
 		GetInput();
-		print(canOpen);
 	}
 }
