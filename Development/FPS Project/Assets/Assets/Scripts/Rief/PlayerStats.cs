@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour {
 
@@ -38,7 +39,7 @@ public class PlayerStats : MonoBehaviour {
             HealthRegen();
         }
         if(hp <= 0) {
-            Die();
+            StartCoroutine(Die());
         }
 	}
 
@@ -50,11 +51,14 @@ public class PlayerStats : MonoBehaviour {
             SanityRegen();
         }
         if(sanity <= 0) {
-            Die();
+            StartCoroutine(Die());
             //speel suicide animatie af
         }
     }
-    void Die() {
-        Destroy(gameObject, 5);
+    public IEnumerator Die() {
+        Debug.Log("start loading");
+        AsyncOperation loadLevel1 = SceneManager.LoadSceneAsync("Rief");
+        Debug.Log("Busy loading");
+        yield return loadLevel1;
     }
 }

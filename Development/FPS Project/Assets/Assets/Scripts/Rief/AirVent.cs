@@ -9,6 +9,7 @@ public class AirVent : MonoBehaviour {
     private float hitRadius = 10f;
     private float hitDis = 10f;
     public int roomID;
+    public bool canGo;
 
     void Start() {
         rb = airVent.GetComponent<Rigidbody>();
@@ -16,7 +17,7 @@ public class AirVent : MonoBehaviour {
 
 
     void OnTriggerEnter(Collider airVentForce) {
-        if (airVentForce.gameObject.tag == "Player") {
+        if (airVentForce.gameObject.tag == "Player" && canGo == true){
             AirVentAction(roomID);
         }
     }
@@ -26,10 +27,11 @@ public class AirVent : MonoBehaviour {
         RaycastHit[] hit = Physics.SphereCastAll(airVent.transform.position, hitRadius, Vector3.forward, hitDis);
         for (int i = 0; i < hit.Length; i++) {
             if(hit[i].transform.tag == "Deur") {
-                if (hit[i].transform.GetComponent<Door>().roomID == RoomID && hit[i].transform.GetComponent<Door>().isOpen == false) {
+                if (hit[i].transform.GetComponent<Door>().roomID == RoomID && hit[i].transform.GetComponent<Door>().isOpen == true) {
                     hit[i].transform.GetComponent<Door>().Open();
                 }
             }
         }
+        canGo = false;
     }
 }

@@ -13,6 +13,6 @@ public class Bottle : MonoBehaviour {
     }
 
     public void FalseBottle() {
-        playerHP.hp = 0;
+        playerHP.hp -= playerHP.maxHp;
     }
 }
