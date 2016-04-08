@@ -16,10 +16,8 @@ public class RoomID : MonoBehaviour
     public int roomLength;
     public int roomWidth;
     public int roomHeigth;
-    public GameObject floor;
-    public GameObject walls;
-    public Vector3[] wallRotations;
-    public GameObject[] spawnedWalls;
+    public GameObject room;
+    public GameObject spawnedRoom;
 
     void Start()
     {
@@ -60,19 +58,16 @@ public class RoomID : MonoBehaviour
 
     public void BuildRoom()
     {
-        floor.transform.localScale = new Vector3(roomWidth,1,roomLength);
-        GameObject spawnedFloor = (GameObject) Instantiate(floor,transform.position-new Vector3(0,CalculateFloorHeight(),0),transform.rotation);
-        spawnedFloor.transform.SetParent(transform);
-        walls.transform.localScale =  new Vector3(roomWidth,roomHeigth,1);
-        spawnedWalls[0] = (GameObject) Instantiate(walls, transform.position += new Vector3(roomWidth/2, 0, 0), Quaternion.Euler(wallRotations[0]));
-        spawnedWalls[1] = (GameObject) Instantiate(walls,transform.position-=new Vector3(roomWidth/2,0,0),Quaternion.Euler(wallRotations[1]));
-        walls.transform.localScale = new Vector3(1, roomHeigth, roomLength);
-        spawnedWalls[2] = (GameObject) Instantiate(walls, transform.position += new Vector3(0, 0, roomLength/2), Quaternion.Euler(wallRotations[2]));
-        spawnedWalls[3] = (GameObject) Instantiate(walls, transform.position += new Vector3(0, 0, 0), Quaternion.Euler(wallRotations[3]));
-        for(int i = 0; i<spawnedWalls.Length; i++)
+        if (spawnedRoom != null)
         {
-            spawnedWalls[i].transform.SetParent(transform);
+            DestroyImmediate(spawnedRoom);
+
         }
+        room.transform.localScale = new Vector3(roomWidth,1,roomLength);
+        GameObject spawnedFloor = (GameObject) Instantiate(room,transform.position-new Vector3(0,CalculateFloorHeight(),0),transform.rotation);
+        spawnedFloor.transform.SetParent(transform);
+        spawnedRoom = spawnedFloor;
+        
     }
 
 

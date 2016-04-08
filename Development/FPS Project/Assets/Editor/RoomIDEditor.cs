@@ -12,6 +12,7 @@ public class RoomIDEditor : Editor
         if (GUILayout.Button("Build Room"))
         {
             roomID.BuildRoom();
+            NavMeshBuilder.BuildNavMesh();
         }
     }
 }
