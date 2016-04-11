@@ -9,9 +9,7 @@ public class KeyPartSpawn : MonoBehaviour {
     public List<GameObject> keySpawns = new List<GameObject>();
 
     void Start () {
-        
         InvokeRepeating("RandomKeySpawn", 0, 1);
-
     }
     void RandomKeySpawn() {
 

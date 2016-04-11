@@ -42,6 +42,9 @@ public class UseScript : MonoBehaviour {
             case Interactable.Interact.Batteries:
                 hit.transform.GetComponent<Batteries>().BatteriesAmmo();
                 break;
+            case Interactable.Interact.Keys:
+                hit.transform.GetComponent<Keys>().KeyFound();
+                break;
         }
     }
     void ButtonInput() {

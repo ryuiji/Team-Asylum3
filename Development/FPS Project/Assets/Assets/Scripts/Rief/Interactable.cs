@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Interactable : MonoBehaviour {
 
-    public enum Interact {Door, FalseBottle, TrueBottle, DeskConversation, PistolAmmo, AKAmmo, ShotgunAmmo, Batteries
-                          }
+    public enum Interact {Door, FalseBottle, TrueBottle, DeskConversation, PistolAmmo, AKAmmo, ShotgunAmmo, Batteries,
+                          Keys}
     public Interact interact;
 
 }

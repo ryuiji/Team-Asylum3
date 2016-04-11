@@ -10,8 +10,10 @@ public class PlayerStats : MonoBehaviour {
     public float sanity;
     public float maxSanity;
     public float sanityReg;
+    public GameObject respawnLoc;
+    public bool[] keyFound;
 
-	void Start () {
+    void Start () {
         hp = maxHp;
         sanity = maxSanity;
 	}
@@ -39,7 +41,8 @@ public class PlayerStats : MonoBehaviour {
             HealthRegen();
         }
         if(hp <= 0) {
-            StartCoroutine(Die());
+            //speel death animatie af
+            Die();
         }
 	}
 
@@ -51,14 +54,14 @@ public class PlayerStats : MonoBehaviour {
             SanityRegen();
         }
         if(sanity <= 0) {
-            StartCoroutine(Die());
             //speel suicide animatie af
+            Die();
+            
         }
     }
-    public IEnumerator Die() {
-        Debug.Log("start loading");
-        AsyncOperation loadLevel1 = SceneManager.LoadSceneAsync("Rief");
-        Debug.Log("Busy loading");
-        yield return loadLevel1;
+    void Die() {
+        hp = maxHp;
+        sanity = maxSanity;
+        transform.position = respawnLoc.transform.position;
     }
 }
