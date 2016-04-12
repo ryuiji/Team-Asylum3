@@ -11,7 +11,11 @@ public class PlayerStats : MonoBehaviour {
     public float maxSanity;
     public float sanityReg;
     public GameObject respawnLoc;
+    public GameObject keySpawn;
+    public int keyCount;
     public bool[] keyFound;
+    private int keyToUnlock = 3;
+
 
     void Start () {
         hp = maxHp;
@@ -63,5 +67,10 @@ public class PlayerStats : MonoBehaviour {
         hp = maxHp;
         sanity = maxSanity;
         transform.position = respawnLoc.transform.position;
+        for (int i = 0; i < keyToUnlock; i++) {
+            keyFound[i] = false;
+            keyCount = 0;
+            keySpawn.GetComponent<KeyPartSpawn>().RandomKeySpawn();
+        }
     }
 }
