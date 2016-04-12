@@ -14,5 +14,10 @@ public class RoomIDEditor : Editor
             roomID.BuildRoom();
             NavMeshBuilder.BuildNavMesh();
         }
+        if (GUILayout.Button("Generate Furniture"))
+        {
+            roomID.BuildRoom();
+            NavMeshBuilder.BuildNavMesh();
+        }
     }
 }

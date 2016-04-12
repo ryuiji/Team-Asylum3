@@ -18,9 +18,10 @@ public class RoomID : MonoBehaviour
     public int roomHeigth;
     public GameObject room;
     public GameObject spawnedRoom;
-
+    public SpawnEnemy spawnEnemy;
     void Start()
     {
+        spawnBools.Clear();
         for(int i = 0; i<spawnPoints.Length; i++)
         {
             spawnBools.Add(false);
@@ -77,6 +78,7 @@ public class RoomID : MonoBehaviour
         {
             int index = RNG();
             Instantiate(enemiesThatWillSpawnHere[Random.Range(0,enemiesThatWillSpawnHere.Length)],spawnPoints[index].position,spawnPoints[index].rotation);
+            spawnEnemy.SpawnEnemy(enemiesThatWillSpawnHere[Random.Range(0, enemiesThatWillSpawnHere.Length)], spawnPoints[index].position, spawnPoints[index].position, spawnPoints[index].rotation);
             spawnBools[index]=true;
             yield return new WaitForSeconds(timeBetweenSpawn);
         }
