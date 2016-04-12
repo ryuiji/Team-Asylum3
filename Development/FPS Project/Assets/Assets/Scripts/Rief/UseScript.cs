@@ -16,35 +16,36 @@ public class UseScript : MonoBehaviour {
     void CanInteract(RaycastHit hit) {
         Bottle bottleP = hit.transform.GetComponent<Bottle>();
         Ammo ammoP = hit.transform.GetComponent<Ammo>();
-            
-        switch (hit.transform.GetComponent<Interactable>().interact) {
-            case Interactable.Interact.Door:
+        if (hit.transform.tag != "Not Interactable") {
+            switch (hit.transform.GetComponent<Interactable>().interact) {
+                case Interactable.Interact.Door:
                 hit.transform.GetComponent<Door>().Open();
                 break;
-            case Interactable.Interact.FalseBottle:
+                case Interactable.Interact.FalseBottle:
                 bottleP.FalseBottle();
                 break;
-            case Interactable.Interact.TrueBottle:
+                case Interactable.Interact.TrueBottle:
                 bottleP.TrueBottle();
                 break;
-            case Interactable.Interact.DeskConversation:
+                case Interactable.Interact.DeskConversation:
                 hit.transform.GetComponent<DeskConversation>().Desk();
                 break;
-            case Interactable.Interact.PistolAmmo:
+                case Interactable.Interact.PistolAmmo:
                 ammoP.PistolAmmo();
                 break;
-            case Interactable.Interact.AKAmmo:
+                case Interactable.Interact.AKAmmo:
                 ammoP.AKAmmo();
                 break;
-            case Interactable.Interact.ShotgunAmmo:
+                case Interactable.Interact.ShotgunAmmo:
                 ammoP.ShotgunAmmo();
                 break;
-            case Interactable.Interact.Batteries:
+                case Interactable.Interact.Batteries:
                 hit.transform.GetComponent<Batteries>().BatteriesAmmo();
                 break;
-            case Interactable.Interact.Keys:
+                case Interactable.Interact.Keys:
                 hit.transform.GetComponent<Keys>().KeyFound();
                 break;
+            }
         }
     }
     void ButtonInput() {
