@@ -32,6 +32,7 @@ public class RoomID : MonoBehaviour
             enemyFrequency=spawnPoints.Length;
         }
         StartCoroutine("SpawnEnemy");
+        spawnEnemy = new SpawnEnemy();
     }
 
     int GetRandomNumber()
@@ -77,8 +78,7 @@ public class RoomID : MonoBehaviour
         for(int i = 0; i<enemyFrequency; i++)
         {
             int index = RNG();
-            Instantiate(enemiesThatWillSpawnHere[Random.Range(0,enemiesThatWillSpawnHere.Length)],spawnPoints[index].position,spawnPoints[index].rotation);
-            spawnEnemy.SpawnEnemy(enemiesThatWillSpawnHere[Random.Range(0, enemiesThatWillSpawnHere.Length)], spawnPoints[index].position, spawnPoints[index].position, spawnPoints[index].rotation);
+            spawnEnemy.SpawnEnemies(enemiesThatWillSpawnHere[Random.Range(0, enemiesThatWillSpawnHere.Length)], spawnPoints[index].position, spawnPoints[index].rotation);
             spawnBools[index]=true;
             yield return new WaitForSeconds(timeBetweenSpawn);
         }
