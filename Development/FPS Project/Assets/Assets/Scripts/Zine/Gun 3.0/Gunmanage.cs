@@ -26,6 +26,7 @@ public class Gunmanage : MonoBehaviour
     public Text currAmountText;
     public Text looseAmountText;
     public Text gunName;
+    public Animator anim;
     // Use this for initialization
     void Start()
     {
@@ -52,11 +53,21 @@ public class Gunmanage : MonoBehaviour
 
         if (Input.GetButton("Fire1") && shoot != null)
         {
+
+            if(gunList[0]!=null && gunList[0].active==true && gunList[0].transform.name=="AK47")
+            {
+                anim.SetBool("Rapid Fire", true);
+            }
+            else
+            {
+                anim.SetTrigger("Attack Weapon");
+            }
             print("shoot");
             shoot();
         }
         if (!Input.GetButton("Fire1") && decrease!=null)
         {
+            anim.SetBool("Rapid Fire",false);
             decrease();
         }
 
@@ -71,6 +82,7 @@ public class Gunmanage : MonoBehaviour
 
         if(Input.GetButtonDown("Reload") && reload != null)
         {
+            anim.SetTrigger("Reload Weapon");
             StartCoroutine(reload());
         }
 
@@ -97,6 +109,7 @@ public class Gunmanage : MonoBehaviour
                         gunList[0].GetComponent<Collider>().enabled=false;
                         DeactivateWeapons();
                         gunList[0].SetActive(true);
+                        CheckWeapon(0);
                         pass();
 
                     }
@@ -114,6 +127,7 @@ public class Gunmanage : MonoBehaviour
                         gunList[0].GetComponent<Collider>().enabled=false;
                         DeactivateWeapons();
                         gunList[0].SetActive(true);
+                        CheckWeapon(0);
                         pass();
                     }
                 }
@@ -127,19 +141,63 @@ public class Gunmanage : MonoBehaviour
         if (gunList[i] != null)
         {
             gunList[i].SetActive(true);
+            CheckWeapon(i);
             print("switched weapon");
             pass();
         }
         else
         {
             ClearDelegates();
+            EmptyAnimation();
             print("switched to empty");
             currAmountText.text="0";
             looseAmountText.text="0";
             gunName.text= "Unarmed";
 
-}
+        }
 
+    }
+
+    public void CheckWeapon(int i)
+    {
+        if(gunList[i].transform.name=="Pistol")
+        {
+            PlayPickUpAnim(0);
+        }
+        if(gunList[i].transform.name=="Shotgun")
+        {
+            PlayPickUpAnim(1);
+        }
+        if(gunList[i].transform.name=="AK47")
+        {
+            PlayPickUpAnim(2);
+        }
+
+    }
+
+    public void PlayPickUpAnim(int i)
+    {
+        EmptyAnimation();
+        if(i == 0)
+        {
+            anim.SetBool("Hgun Equip", true);
+        }
+        if(i == 1)
+        {
+            anim.SetBool("Shotgun Equip", true);
+        }
+        if(i == 2)
+        {
+            anim.SetBool("AK47 Equip", true);
+        }
+    }
+
+    public void EmptyAnimation()
+    {
+        anim.SetBool("Hgun Equip", false);
+        anim.SetBool("Shotgun Equip", false);
+        anim.SetBool("AK47 Equip", false);
+        anim.SetBool("Cleaver Equip", false);
     }
 
     public void DeactivateWeapons()

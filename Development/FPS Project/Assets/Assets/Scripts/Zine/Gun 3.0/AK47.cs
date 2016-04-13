@@ -139,18 +139,12 @@ public class AK47 : GunAbstract
 
     public override void IncreaseRecoil()
     {
-        if(recoilAmount<maxRecoilAmount)
-        {
-            recoilAmount+=0.1f;
-        }
+
     }
 
     public override void DecreaseRecoil()
     {
-        if (recoilAmount > 0 )
-        {
-            recoilAmount -= 1f * Time.deltaTime;
-        }
+
     }
 
     public override IEnumerator RateOfFire()
