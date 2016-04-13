@@ -43,6 +43,7 @@ public abstract class GunAbstract : MonoBehaviour
     public float recoilAmount;
     public float maxRecoilAmount;
     public GameObject muzzle;
+    public Animator anim;
 
     [Header("Sound Files")]
     public AudioSource audioSource;

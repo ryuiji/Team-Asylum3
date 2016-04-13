@@ -12,6 +12,7 @@ public class Pistol : GunAbstract
 
     public override void Shoot()
     {
+        anim.SetTrigger("Attack Weapon");
         GameObject muzzleSpawned = (GameObject) Instantiate(muzzle,firePoint.position,transform.rotation);
         muzzleSpawned.transform.SetParent(firePoint);
         bulletsInClip--;
@@ -27,6 +28,7 @@ public class Pistol : GunAbstract
     {
         if (isReloading == false)
         {
+            anim.SetTrigger("Reload Weapon");
             gunManager.isReloading=true;
             StopCoroutine("RateOfFire");
             isReloading = true;
@@ -37,6 +39,7 @@ public class Pistol : GunAbstract
                 mayFire = true;
                 StopCoroutine("Reload");
             }
+            yield return new WaitForSeconds(0.8f);
             audioSource.PlayOneShot(reload);
             yield return new WaitForSeconds(reloadSpeed);
             isReloading = false;

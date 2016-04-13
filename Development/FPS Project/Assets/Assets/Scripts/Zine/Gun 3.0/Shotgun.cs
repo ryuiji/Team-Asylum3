@@ -15,6 +15,7 @@ public class Shotgun : GunAbstract {
 
     public override void Shoot()
     {
+        anim.SetTrigger("Attack Weapon");
         GameObject muzzleSpawned = (GameObject) Instantiate(muzzle,firePoint.position,transform.rotation);
         muzzleSpawned.transform.SetParent(firePoint);
         StartCoroutine("RateOfFire");
@@ -31,6 +32,7 @@ public class Shotgun : GunAbstract {
     {
         if(isReloading==false)
         {
+            anim.SetBool("Shotgun Equip", false);
             mayFire = false;
             isReloading = true;
             for (int i = 0; i < clipSize; i++)
@@ -60,6 +62,7 @@ public class Shotgun : GunAbstract {
             }
             StartCoroutine("RateOfFire");
             isReloading = false;
+            anim.SetBool("Shotgun Equip", true);
         }
 
 
@@ -152,6 +155,7 @@ public class Shotgun : GunAbstract {
     public override IEnumerator RateOfFire()
     {
         mayFire = false;
+        yield return new WaitForSeconds(1.2f);
        	audioSource.PlayOneShot(pumpSound);
         yield return new WaitForSeconds(pumpSound.length);
         mayFire = true;

@@ -41,6 +41,15 @@ public class Gunmanage : MonoBehaviour
 
     void GetInput()
     {
+        if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0)
+        {
+            anim.SetBool("Walk Weapon", true);
+        }
+        else
+        {
+            anim.SetBool("Walk Weapon",  false);
+        }
+
         if (Input.GetButtonDown("WeaponOne") && CheckGun(0)==true)
         {
             SwitchWeapon(0);
@@ -53,15 +62,6 @@ public class Gunmanage : MonoBehaviour
 
         if (Input.GetButton("Fire1") && shoot != null)
         {
-
-            if(gunList[0]!=null && gunList[0].active==true && gunList[0].transform.name=="AK47")
-            {
-                anim.SetBool("Rapid Fire", true);
-            }
-            else
-            {
-                anim.SetTrigger("Attack Weapon");
-            }
             print("shoot");
             shoot();
         }
@@ -82,7 +82,6 @@ public class Gunmanage : MonoBehaviour
 
         if(Input.GetButtonDown("Reload") && reload != null)
         {
-            anim.SetTrigger("Reload Weapon");
             StartCoroutine(reload());
         }
 

@@ -11,6 +11,7 @@ public class AK47 : GunAbstract
 
     public override void Shoot()
     {
+        anim.SetBool("Rapid Fire",true);
         GameObject muzzleSpawned = (GameObject) Instantiate(muzzle,firePoint.position,transform.rotation);
         muzzleSpawned.transform.SetParent(firePoint);
         bulletsInClip--;
@@ -27,6 +28,7 @@ public class AK47 : GunAbstract
 
         if (isReloading == false)
         {
+            anim.SetTrigger("Reload Weapon");
             gunManager.isReloading = true;
             StopCoroutine("RateOfFire");
             isReloading = true;
