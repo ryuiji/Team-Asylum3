@@ -16,10 +16,11 @@ public class KeyPartSpawn : MonoBehaviour {
 
         while(maxSpawn < 3) {
             int spawnNum = Random.Range(0, keySpawns.Count);
-            Instantiate(keyPart, keySpawns[spawnNum].transform.position, Quaternion.identity);
-            keySpawns[spawnNum].SetActive(false);
-            maxSpawn++;
-
+            if (keySpawns[spawnNum].GetComponent<KeyBoolean>().canSpawn == true) {
+                Instantiate(keyPart, keySpawns[spawnNum].transform.position, Quaternion.identity);
+                maxSpawn++;
+                keySpawns[spawnNum].GetComponent<KeyBoolean>().canSpawn = false;
+            }
         }
     }
 }

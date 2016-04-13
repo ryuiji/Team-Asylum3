@@ -64,6 +64,12 @@ public class PlayerStats : MonoBehaviour {
         }
     }
     void Die() {
+        //wapens(start met pistol)
+        //deuren dicht die dicht horen
+        //ammo van pistol
+        //flashlight uit
+        //enemy spawn
+        //puzzels
         hp = maxHp;
         sanity = maxSanity;
         transform.position = respawnLoc.transform.position;

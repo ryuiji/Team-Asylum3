@@ -5,6 +5,8 @@ public class Keys : MonoBehaviour {
 
     public GameObject player;
     PlayerStats playerKeys;
+    public int spawnLocation;
+
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         playerKeys = player.GetComponent<PlayerStats>();
