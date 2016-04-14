@@ -5,7 +5,8 @@ public class Keys : MonoBehaviour {
 
     public GameObject player;
     PlayerStats playerKeys;
-    public int spawnLocation;
+    KeyPartSpawn keySpawnP;
+    public GameObject keyPartSpawn;
 
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -13,12 +14,12 @@ public class Keys : MonoBehaviour {
     }
 
 	public void KeyFound () {
-        
-        if(playerKeys.keyFound.Length != playerKeys.keyCount) {
+        keySpawnP = keyPartSpawn.GetComponent<KeyPartSpawn>();
+        if (playerKeys.keyFound.Length != playerKeys.keyCount) {
             playerKeys.keyFound[playerKeys.keyCount] = true;
             playerKeys.keyCount++;
+            }
             Destroy(gameObject);
             playerKeys.keySpawn.GetComponent<KeyPartSpawn>().maxSpawn--;
         }
     }
-}
