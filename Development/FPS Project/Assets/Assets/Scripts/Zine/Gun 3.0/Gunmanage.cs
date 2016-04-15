@@ -28,11 +28,12 @@ public class Gunmanage : MonoBehaviour
     public Text gunName;
     public Animator anim;
     public bool isInMelee;
+    public bool isSwitching;
 
     // Use this for initialization
     void Start()
     {
-        SwitchWeapon(1);    
+        StartCoroutine(SwitchWeapon(1));    
     }
 
     // Update is called once per frame
@@ -63,23 +64,23 @@ public class Gunmanage : MonoBehaviour
 
         if (Input.GetButtonDown("WeaponOne") && CheckGun(0)==true)
         {
-            SwitchWeapon(0);
+            StartCoroutine(SwitchWeapon(0));
         }
 
         if (Input.GetButtonDown("WeaponTwo") && CheckGun(1) == true)
         {
-            SwitchWeapon(1);
+            StartCoroutine(SwitchWeapon(1));
         }
         if(Input.GetButtonDown("WeaponThree"))
         {
             SwitchToMelee();
         }
-        if(Input.GetButtonDown("Fire1") &&  isInMelee==true && GetComponent<MeleeAttack>().isMeleeing==false)
+        if(Input.GetButtonDown("Fire1") &&  isInMelee==true && GetComponent<MeleeAttack>().isMeleeing==false && isSwitching==false)
         {
             GetComponent<MeleeAttack>().StartCoroutine("EquippedStab");
             
         }
-        else if (Input.GetButton("Fire1") && shoot != null && isInMelee==false)
+        else if (Input.GetButton("Fire1") && shoot != null && isInMelee==false && isSwitching == false)
         {
             print("shoot");
             shoot();
@@ -153,8 +154,9 @@ public class Gunmanage : MonoBehaviour
         }
     }
 
-    public void SwitchWeapon(int i)
+    public IEnumerator SwitchWeapon(int i)
     {
+        isSwitching=true;
         DeactivateWeapons();
         if (gunList[i] != null)
         {
@@ -173,6 +175,8 @@ public class Gunmanage : MonoBehaviour
             gunName.text= "Unarmed";
 
         }
+        yield return new WaitForSeconds(2f);
+        isSwitching=false;
 
     }
 
