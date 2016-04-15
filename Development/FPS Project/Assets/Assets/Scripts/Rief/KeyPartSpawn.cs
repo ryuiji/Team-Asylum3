@@ -5,26 +5,22 @@ using System.Collections.Generic;
 public class KeyPartSpawn : MonoBehaviour {
 
     public GameObject keyPart;
-    public int maxSpawn;
+    private int maxSpawn = 3;
+    public int spawned;
     public List<GameObject> keySpawns = new List<GameObject>();
-    public GameObject[] spawnLocation;
 
     void Start () {
         RandomKeySpawn();
     }
     public void RandomKeySpawn() {
-        while(maxSpawn < 3) {
+        while(spawned < maxSpawn) {
             int spawnNum = Random.Range(0, keySpawns.Count);
             if (keySpawns[spawnNum].GetComponent<KeyBoolean>().canSpawn == true) {
-                Instantiate(keyPart, keySpawns[spawnNum].transform.position, Quaternion.identity);
+                GameObject tempObject = Instantiate(keyPart, keySpawns[spawnNum].transform.position, Quaternion.identity) as GameObject;
                 keySpawns[spawnNum].GetComponent<KeyBoolean>().canSpawn = false;
-                SafeLocation(maxSpawn, spawnNum);
-                maxSpawn++;
+                tempObject.GetComponent<Keys>().spawnLocNum = spawnNum;
+                spawned++;
             }
         }
-    }
-
-    public void SafeLocation (int maxSpawn, int spawnNum) {
-        spawnLocation[maxSpawn] = keySpawns[spawnNum];
     }
 }

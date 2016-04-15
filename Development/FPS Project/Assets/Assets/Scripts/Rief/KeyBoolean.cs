@@ -8,6 +8,8 @@ public class KeyBoolean : MonoBehaviour {
     void Start() {
         canSpawn = true;
     }
+    void Update() {
+    }
 
 
 }
