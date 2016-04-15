@@ -11,49 +11,31 @@ public class MeleeAttack : MonoBehaviour
     public float stabRange;
     public int stabDamage;
     public bool isMeleeing;
+    public Animator anim;
     // Use this for initialization
     void Start()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        GetInput();
-    }
 
-    public void GetInput()
-    {
-        if(Input.GetButtonDown("Melee"))
-        {
-            if(isMeleeing==false)
-            {
-                StartCoroutine("Stab");
-            }
-        }
-    }
 
-    public IEnumerator Stab()
+    public IEnumerator EquippedStab()
     {
-        isMeleeing=true;
-        int activeGun = gunManage.ReturnActiveWeapon();
-        gunManage.DeactivateWeapons();
-        gunManage.enabled=false;
+        anim.SetTrigger("Attack Weapon");
+        isMeleeing = true;
         //play animation
         source.PlayOneShot(lungeAudio);
         yield return new WaitForSeconds(lungeAudio.length);  //replace with animationImpact Time
         source.PlayOneShot(stabAudio);
-        if (Physics.Raycast(transform.position,transform.forward, out hit, stabRange))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, stabRange))
         {
-            if(hit.transform.tag=="EnemyBodyPart")
+            if (hit.transform.tag == "EnemyBodyPart")
             {
                 hit.transform.GetComponent<EnemyBodyParts>().DoDamage(stabDamage);
             }
         }
         yield return new WaitForSeconds(lungeAudio.length);
-        gunManage.enabled=true;
-        gunManage.SwitchWeapon(activeGun);
-        isMeleeing=false;
+        isMeleeing = false;
     }
 }

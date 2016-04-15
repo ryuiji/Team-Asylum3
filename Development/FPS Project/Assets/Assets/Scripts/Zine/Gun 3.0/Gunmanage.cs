@@ -27,6 +27,8 @@ public class Gunmanage : MonoBehaviour
     public Text looseAmountText;
     public Text gunName;
     public Animator anim;
+    public bool isInMelee;
+
     // Use this for initialization
     void Start()
     {
@@ -37,6 +39,15 @@ public class Gunmanage : MonoBehaviour
     void Update()
     {
         GetInput();
+    }
+
+    void SwitchToMelee()
+    {
+        print("ToMelee");
+        EmptyAnimation();
+        DeactivateWeapons();
+        isInMelee = true;
+        anim.SetBool("Cleaver Equip", true);
     }
 
     void GetInput()
@@ -59,8 +70,16 @@ public class Gunmanage : MonoBehaviour
         {
             SwitchWeapon(1);
         }
-
-        if (Input.GetButton("Fire1") && shoot != null)
+        if(Input.GetButtonDown("WeaponThree"))
+        {
+            SwitchToMelee();
+        }
+        if(Input.GetButtonDown("Fire1") &&  isInMelee==true && GetComponent<MeleeAttack>().isMeleeing==false)
+        {
+            GetComponent<MeleeAttack>().StartCoroutine("EquippedStab");
+            
+        }
+        else if (Input.GetButton("Fire1") && shoot != null && isInMelee==false)
         {
             print("shoot");
             shoot();
@@ -179,6 +198,7 @@ public class Gunmanage : MonoBehaviour
         EmptyAnimation();
         if(i == 0)
         {
+            
             anim.SetBool("Hgun Equip", true);
         }
         if(i == 1)
@@ -197,10 +217,12 @@ public class Gunmanage : MonoBehaviour
         anim.SetBool("Shotgun Equip", false);
         anim.SetBool("AK47 Equip", false);
         anim.SetBool("Cleaver Equip", false);
+        anim.SetBool("Walk Weapon", false);
     }
 
     public void DeactivateWeapons()
     {
+        isInMelee=false;
         for(int i =0; i<gunList.Length; i++)
         {
             if(gunList[i]!=null)

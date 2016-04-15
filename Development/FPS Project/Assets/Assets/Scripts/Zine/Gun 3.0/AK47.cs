@@ -40,7 +40,7 @@ public class AK47 : GunAbstract
                 StopCoroutine("Reload");
             }
             audioSource.PlayOneShot(reload);
-            yield return new WaitForSeconds(reloadSpeed);
+            yield return new WaitForSeconds(reload.length);
             isReloading = false;
             mayFire = true;
             if (looseAmmo >= clipSize)
