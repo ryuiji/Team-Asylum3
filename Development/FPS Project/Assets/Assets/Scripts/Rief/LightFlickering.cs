@@ -4,8 +4,8 @@ using System.Collections;
 public class LightFlickering : MonoBehaviour {
 
     public Light lightF;
-    private float minWait = 0.1f;
-    private float maxWait = 1f;
+    public float minWait;
+    public float maxWait;
 
 	void Start () {
         lightF.enabled = false;
