@@ -93,14 +93,14 @@ public class Gunmanage : MonoBehaviour
 
         if(Input.GetMouseButton(1) && aim !=null)
         {
-            aim();
+            anim.SetBool("Aim", true);
         }
         else if(unAim != null)
         {
-            unAim();
+            anim.SetBool("Aim", false);
         }
 
-        if(Input.GetButtonDown("Reload") && reload != null)
+        if (Input.GetButtonDown("Reload") && reload != null)
         {
             StartCoroutine(reload());
         }
