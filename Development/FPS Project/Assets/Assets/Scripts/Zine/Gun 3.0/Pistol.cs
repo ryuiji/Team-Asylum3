@@ -70,27 +70,14 @@ public class Pistol : GunAbstract
         gunManager.UpdateUI(bulletsInClip, looseAmmo, gunName);
     }
 
-    public override void Aim()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, aimSpot.position, aimSpeed * Time.deltaTime);
-    }
-
-    public override void UnAim()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, normalSpot.position, aimSpeed * Time.deltaTime);
-    }
 
     public override void PassDelegates()
     {
         audioSource = gunManager.gunAudio;
         gunManager.shoot = PullTrigger;
-        gunManager.aim = Aim;
-        gunManager.unAim = UnAim;
         gunManager.reload = Reload;
         gunManager.decrease = DecreaseRecoil;
         gunManager.addAmmo = AddAmmo;
-        transform.position=normalSpot.position;
-        transform.rotation=normalSpot.rotation;
         gunManager.UpdateUI(bulletsInClip, looseAmmo, gunName);
     }
 

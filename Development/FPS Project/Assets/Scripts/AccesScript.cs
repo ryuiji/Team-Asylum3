@@ -28,10 +28,10 @@ public class AccesScript : MonoBehaviour {
 		Arms = GameObject.Find ("MC_Arms");
 		ArmsScript = Arms.GetComponent<ragdollController02> ();
 
-		Body = GameObject.Find ("MainCharacter");
+		Body = GameObject.Find ("Player");
 		BodyScript = Body.GetComponent<ragdollController> ();
 
-		Body = GameObject.Find ("MainCharacter");
+		Body = GameObject.Find ("Player");
 		BodyScript = Body.GetComponent<ragdollController> ();
 
 		Camura = GameObject.Find ("MainCamera01");

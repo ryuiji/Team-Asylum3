@@ -91,11 +91,11 @@ public class Gunmanage : MonoBehaviour
             decrease();
         }
 
-        if(Input.GetMouseButton(1) && aim !=null)
+        if(Input.GetMouseButton(1) && Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
         {
             anim.SetBool("Aim", true);
         }
-        else if(unAim != null)
+        else if(!Input.GetMouseButton(1) || Input.GetAxis("Horizontal")>0 || Input.GetAxis("Vertical") > 0)
         {
             anim.SetBool("Aim", false);
         }

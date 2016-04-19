@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
         float horizontal = rotateSpeed * Input.GetAxis("Mouse X");
         transform.Rotate(0, horizontal, 0);
         curRot += vertical;
-        curRot = Mathf.Clamp(curRot, -70, 30); //aanpassen wanneer we de main character hebben. (1e naar boven, 2e naar onder) k den
+        curRot = Mathf.Clamp(curRot, -70, 30);
         Quaternion rot = Quaternion.identity;
         rot.eulerAngles = new Vector3(curRot, Camera.main.transform.localEulerAngles.y, Camera.main.transform.localEulerAngles.z);
         Camera.main.transform.localRotation = rot;

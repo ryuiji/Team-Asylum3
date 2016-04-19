@@ -6,6 +6,8 @@ public class MakeShiftHp : MonoBehaviour
 {
     public int hp;
     public Text text;
+    public AccesScript acces;
+    public CharacterController cc;
     // Use this for initialization
     void Start()
     {
@@ -23,13 +25,16 @@ public class MakeShiftHp : MonoBehaviour
         hp-=damageTaken;
         if(hp<=0)
         {
-            Death();
+            StartCoroutine(Death());
         }
         text.text=hp.ToString();
     }
 
-    void Death()
+    IEnumerator Death()
     {
-        Destroy(this.gameObject);
+        GetComponent<PlayerController>().enabled=false;
+        Destroy(cc);
+        yield return new WaitForSeconds(0.1f);
+        acces.ActivateDeath=true;
     }
 }

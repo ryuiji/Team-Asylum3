@@ -32,8 +32,6 @@ public abstract class GunAbstract : MonoBehaviour
     public float fireRate;
     public bool isReloading;
     public Gunmanage gunManager;
-    public Transform aimSpot;
-    public Transform normalSpot;
     public float aimSpeed;
     public int damage;
     public float minRecoilX;
@@ -55,10 +53,6 @@ public abstract class GunAbstract : MonoBehaviour
     public abstract void Shoot();
 
     public abstract IEnumerator Reload();
-
-    public abstract void Aim();
-
-    public abstract void UnAim();
 
     public abstract void PassDelegates();
 

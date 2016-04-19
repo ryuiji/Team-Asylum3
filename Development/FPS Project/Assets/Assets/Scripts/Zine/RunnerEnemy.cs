@@ -22,8 +22,10 @@ public class RunnerEnemy : EnemyAbstract
     {
         if (aggrod == false)
         {
+            print(Vector3.Distance(transform.position, player.transform.position));
             if (Vector3.Distance(transform.position, player.transform.position) < lengthOfSight)
             {
+                print("Distance");
                 if (CheckLineOfSight() == true)
                 {
                     print("Engaged");
