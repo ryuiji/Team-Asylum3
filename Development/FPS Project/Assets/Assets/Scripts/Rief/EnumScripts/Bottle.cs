@@ -10,6 +10,7 @@ public class Bottle : MonoBehaviour {
     }
     public void TrueBottle() {
         playerHP.maxHp += 10;
+        playerHP.puzzle1Complete = true;
     }
 
     public void FalseBottle() {

@@ -17,8 +17,7 @@ public class Keys : MonoBehaviour {
 
 	public void KeyFound () {
         keySpawnP = keyPartSpawn.GetComponent<KeyPartSpawn>();
-        if (playerKeys.keyFound.Length != playerKeys.keyCount) {
-            playerKeys.keyFound[playerKeys.keyCount] = true;
+            if(playerKeys.keyCount <= playerKeys.keyToUnlock) {
             keySpawnP.keySpawns[spawnLocNum].GetComponent<KeyBoolean>().canSpawn = true;
             playerKeys.keyCount++;
             }

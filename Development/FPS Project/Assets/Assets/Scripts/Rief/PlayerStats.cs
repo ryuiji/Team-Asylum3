@@ -4,17 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour {
 
+    public GameObject respawnLoc;
+    public GameObject keySpawn;
+    public GameObject doorManager;
     public float hp;
     public float maxHp;
     public float healthReg;
     public float sanity;
     public float maxSanity;
     public float sanityReg;
-    public GameObject respawnLoc;
-    public GameObject keySpawn;
     public int keyCount;
-    public bool[] keyFound;
-    private int keyToUnlock = 3;
+    public int keyToUnlock = 3;
+    public bool puzzle1Complete;
 
 
     void Start () {
@@ -69,14 +70,17 @@ public class PlayerStats : MonoBehaviour {
         //ammo van pistol
         //flashlight uit
         //enemy spawn
-        //puzzels
+        AllDoors doorFix;
+        doorFix = doorManager.GetComponent<AllDoors>();
+        for (int i = 0; i < doorFix.allDoors.Length; i++) {
+            doorFix.allDoors[i].GetComponent<Door>().isOpen = false;
+        }
+        puzzle1Complete = false;
         hp = maxHp;
         sanity = maxSanity;
         transform.position = respawnLoc.transform.position;
-        for (int i = 0; i < keyToUnlock; i++) {
-            keyFound[i] = false;
-            keyCount = 0;
-            keySpawn.GetComponent<KeyPartSpawn>().RandomKeySpawn();
+        transform.rotation = respawnLoc.transform.rotation;
+        keyCount = 0;
+        keySpawn.GetComponent<KeyPartSpawn>().RandomKeySpawn();
         }
-    }
 }
