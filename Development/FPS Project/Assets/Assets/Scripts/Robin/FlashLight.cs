@@ -5,7 +5,7 @@ using System.Collections;
 
 public class FlashLight : MonoBehaviour {
 	private bool canTurnOn;
-	private bool isOn;
+	public bool isOn;
 	public float batteryEnergy;
 	
 	void Update () {
