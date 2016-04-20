@@ -18,7 +18,7 @@ public class Inspect : MonoBehaviour {
 	private RaycastHit hit;
 	private Vector3 oldPosition;
 	private Quaternion oldRotation;
-	private float rotateSpeed = 1000;
+	private float rotateSpeed = 1250;
 
 	void Update () {
 		CheckBool();
