@@ -32,7 +32,8 @@ public class QuickieController : MonoBehaviour
         transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
         camera.transform.Rotate(-Input.GetAxis("Mouse Y") * mouseSpeedX * Time.deltaTime, 0, 0);
-        if(Physics.Raycast(transform.position,Vector3.down,0.33f))
+        Debug.DrawRay(transform.position,Vector3.down);
+        if(Physics.Raycast(transform.position,Vector3.down,out hit, 0.5f))
         {
             rigid.useGravity=false;
             rigid.velocity = new Vector3(0,0,0);
