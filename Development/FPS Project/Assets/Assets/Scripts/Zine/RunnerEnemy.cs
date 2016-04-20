@@ -128,7 +128,7 @@ public class RunnerEnemy : EnemyAbstract
     {
         if (Physics.Linecast(transform.position, player.transform.position, out hit))
         {
-            if (hit.transform.tag == "Player")
+            if (hit.transform.tag == "PlayerPart")
             {
                 return true;
             }

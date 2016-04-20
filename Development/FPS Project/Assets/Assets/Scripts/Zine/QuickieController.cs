@@ -35,15 +35,22 @@ public class QuickieController : MonoBehaviour
         Debug.DrawRay(transform.position,Vector3.down);
         if(Physics.Raycast(transform.position,Vector3.down,out hit, 0.5f))
         {
-            rigid.useGravity=false;
-            rigid.velocity = new Vector3(0,0,0);
+            print(hit.transform.name);
+            if(hit.transform.tag!="PlayerPart")
+            {
+                hasJumped=false;
+                rigid.useGravity = false;
+                rigid.velocity = new Vector3(0, 0, 0);
+            }
+
         }
         else
         {
             rigid.useGravity=true;
         }
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && hasJumped==false)
         {
+            hasJumped=true;
             rigid.velocity = new Vector3(0,jumpForce,0);
         }
     }
