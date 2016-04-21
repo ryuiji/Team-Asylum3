@@ -16,8 +16,7 @@ public class OptionManager : MonoBehaviour {
 
 	public void ChangeQuality () {
 		QualitySettings.SetQualityLevel(graphicDropdown.GetComponent<Dropdown>().value);
-		Camera.main.GetComponent<Antialiasing>().enabled = antiAliasing.GetComponent<Toggle>().isOn;
-		Camera.main.GetComponent<Bloom>().enabled = bloom.GetComponent<Toggle>().isOn;
+		Camera.main.GetComponent<BloomAndFlares>().enabled = bloom.GetComponent<Toggle>().isOn;
 	}
 
 	public void EnableDisableGraphics () {
