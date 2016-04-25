@@ -45,6 +45,9 @@ public class UseScript : MonoBehaviour {
                 case Interactable.Interact.Keys:
                 hit.transform.GetComponent<Keys>().KeyFound();
                 break;
+                case Interactable.Interact.Clue:
+                hit.transform.GetComponent<Clue>().ClueFound();
+                break;
             }
         }
     }
