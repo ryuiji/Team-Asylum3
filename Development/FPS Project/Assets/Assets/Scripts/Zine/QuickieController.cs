@@ -17,6 +17,7 @@ public class QuickieController : MonoBehaviour
     public RaycastHit hit;
     public Rigidbody rigid;
     public Animator anim;
+    public Transform rayCastObj;
 
     [Header("Camera Vars")]
     public float lookSensitivity = 5;
@@ -55,30 +56,12 @@ public class QuickieController : MonoBehaviour
     {
         CameraLook();
         Animate();
-        transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+        //transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
         Debug.DrawRay(transform.position,Vector3.down);
-        if(Physics.Raycast(transform.position,Vector3.down,out hit, 0.5f))
-        {
-            print(hit.transform.name);
-            if(hit.transform.tag!="PlayerPart")
-            {
-                hasJumped=false;
-                rigid.useGravity = false;
-                rigid.velocity = new Vector3(0, 0, 0);
-            }
 
-        }
-        else
-        {
-            rigid.useGravity=true;
-        }
-        if(Input.GetButtonDown("Jump") && hasJumped==false)
-        {
-            hasJumped=true;
-            rigid.velocity = new Vector3(0,jumpForce,0);
-        }
     }
+
 
 
     public void Animate()
@@ -89,23 +72,72 @@ public class QuickieController : MonoBehaviour
             anim.SetBool("Walk",false);
             anim.SetBool("strafe R",true);
             anim.SetBool("strafe L",false);
+            if(Raycast(transform.right))
+            {
+                print("Hit something");
+            }
+            else
+            {
+                transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*moveSpeed,0,0);
+            }
         }
         if (Input.GetAxis("Horizontal")<0)
         {
             anim.SetBool("Walk", false);
             anim.SetBool("strafe L", true);
             anim.SetBool("strafe R", false);
+            if (Raycast(-transform.right))
+            {
+                print("Hit something");
+            }
+            else
+            {
+                transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0);
+            }
         }
         if (Input.GetAxis("Vertical") > 0)
         {
             anim.SetBool("strafe R", false);
             anim.SetBool("strafe L", false);
             anim.SetBool("Walk", true);
+            if (Raycast(transform.forward))
+            {
+                print("Hit something");
+            }
+            else
+            {
+                transform.Translate(0,0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
+            }
+        }
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            anim.SetBool("strafe R", false);
+            anim.SetBool("strafe L", false);
+            anim.SetBool("Walk", true);
+            if (Raycast(-transform.forward))
+            {
+                print("Hit something");
+            }
+            else
+            {
+                transform.Translate(0, 0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
+            }
         }
     }
 
 
-
+    bool Raycast(Vector3 dir)
+    {
+        if(Physics.Raycast(rayCastObj.transform.position,dir,out hit, 0.5f) && hit.transform.tag!="PlayerPart")
+        {
+            print(hit.transform.name);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public float ClampAngle(float angle, float min, float max)
     {
