@@ -30,7 +30,7 @@ public class Shotgun : GunAbstract {
 
     public override IEnumerator Reload()
     {
-        if(isReloading==false)
+        if(isReloading==false && mayFire==true)
         {
             anim.SetBool("Shotgun Equip", false);
             mayFire = false;

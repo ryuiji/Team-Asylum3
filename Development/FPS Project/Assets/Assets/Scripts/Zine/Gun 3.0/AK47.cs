@@ -26,7 +26,7 @@ public class AK47 : GunAbstract
     public override IEnumerator Reload()
     {
 
-        if (isReloading == false)
+        if (isReloading == false && mayFire==true)
         {
             anim.SetTrigger("Reload Weapon");
             gunManager.isReloading = true;

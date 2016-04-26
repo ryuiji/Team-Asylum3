@@ -119,12 +119,13 @@ public class Gunmanage : MonoBehaviour
                     if(CheckGun(0)==false)
                     {
                         print("REPLACE");
+                        print("DITWORDUITEGEVOERD");
                         gunList[0].transform.parent=null;
                         gunList[0].GetComponent<Collider>().enabled=true;
                         hit.transform.position=gunList[0].transform.position;
                         gunList[0]=hit.transform.gameObject;
                         gunList[0].transform.SetParent(transform);
-                        hit.transform.rotation=transform.rotation;  
+                        //hit.transform.rotation=transform.rotation;  
                         gunList[0].GetComponent<Collider>().enabled=false;
                         DeactivateWeapons();
                         gunList[0].SetActive(true);

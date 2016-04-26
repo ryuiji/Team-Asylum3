@@ -6,11 +6,13 @@ public class RunnerEnemy : EnemyAbstract
     public AudioClip screamSound;
     public float sprintSpeed;
     public ParticleSystem hitParticle;
+    public GameObject playerRCObj;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         player = GameObject.Find("Player");
+        playerRCObj = GameObject.Find("Player RCOBJ");
     }
 
     void Update()
@@ -22,7 +24,6 @@ public class RunnerEnemy : EnemyAbstract
     {
         if (aggrod == false)
         {
-            print(Vector3.Distance(transform.position, player.transform.position));
             if (Vector3.Distance(transform.position, player.transform.position) < lengthOfSight)
             {
                 print("Distance");
@@ -71,7 +72,7 @@ public class RunnerEnemy : EnemyAbstract
     {
         agent.speed=0;
         audioSource.PlayOneShot(screamSound);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         agent.speed=sprintSpeed;
     }
 
@@ -126,8 +127,10 @@ public class RunnerEnemy : EnemyAbstract
 
     public override bool CheckLineOfSight()
     {
-        if (Physics.Linecast(transform.position, player.transform.position, out hit))
+        Debug.DrawLine(transform.position,player.transform.position, Color.red);
+        if (Physics.Linecast(transform.position, playerRCObj.transform.position, out hit))
         {
+            print(hit.transform.name);
             if (hit.transform.tag == "PlayerPart")
             {
                 return true;

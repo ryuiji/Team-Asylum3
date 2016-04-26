@@ -8,6 +8,7 @@ public class MakeShiftHp : MonoBehaviour
     public Text text;
     public AccesScript acces;
     public CharacterController cc;
+    public Animator anim;
     // Use this for initialization
     void Start()
     {
@@ -17,7 +18,10 @@ public class MakeShiftHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(500);
+        }
     }
 
     public void TakeDamage(int damageTaken)
@@ -32,9 +36,9 @@ public class MakeShiftHp : MonoBehaviour
 
     IEnumerator Death()
     {
-        GetComponent<PlayerController>().enabled=false;
-        Destroy(cc);
-        yield return new WaitForSeconds(0.1f);
+        GetComponent<QuickieController>().enabled=false;
+        anim.SetBool("Suicide", true);
+        yield return new WaitForSeconds(2.6f);
         acces.ActivateDeath=true;
     }
 }
