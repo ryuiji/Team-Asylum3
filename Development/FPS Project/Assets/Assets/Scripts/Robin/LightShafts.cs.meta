@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 76e91079e9af83c4f878b8ca53881528
+timeCreated: 1463124848
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - m_CurrentCamera: {instanceID: 0}
+  - m_DepthShader: {fileID: 4800000, guid: edd6deb46b7019d488d718e0fb5b5180, type: 3}
+  - m_ColorFilterShader: {fileID: 4800000, guid: 875b6f0567c63424ebc06d13f6ae2ccc,
+      type: 3}
+  - m_CoordShader: {fileID: 4800000, guid: 1f980d40c4b9d6b4090b5f3776cbe23f, type: 3}
+  - m_DepthBreaksShader: {fileID: 4800000, guid: b189f49267e246445a91e8e2ab338146,
+      type: 3}
+  - m_RaymarchShader: {fileID: 4800000, guid: 81997ca8c17ce974b97a5587bcbc3674, type: 3}
+  - m_InterpolateAlongRaysShader: {fileID: 4800000, guid: 46ae27694af52ff4097f7fe22e5b5a53,
+      type: 3}
+  - m_SamplePositionsShader: {fileID: 4800000, guid: acfceaf664c03f64dbba34d0be9c4e42,
+      type: 3}
+  - m_FinalInterpolationShader: {fileID: 4800000, guid: 29309f78658ed2e4b9aa9c18eefc6112,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
