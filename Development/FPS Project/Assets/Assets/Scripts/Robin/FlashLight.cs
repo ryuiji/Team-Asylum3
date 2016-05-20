@@ -17,6 +17,9 @@ public class FlashLight : MonoBehaviour {
 	void CheckFlashLight () {
 		if(batteryEnergy > 0){
 			canTurnOn = true;
+		}else{
+			GetComponent<Light>().enabled = false;
+			isOn = false;
 		}
 	}
 
