@@ -14,6 +14,7 @@ public class QuickieController : MonoBehaviour
     public float minX;
     public float jumpForce;
     public bool hasJumped;
+    public bool canMove;
     public RaycastHit hit;
     public Rigidbody rigid;
     public Animator anim;
@@ -33,6 +34,7 @@ public class QuickieController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        canMove = true;
         Cursor.lockState=CursorLockMode.Locked;
         Cursor.visible=false;
     }
@@ -55,7 +57,9 @@ public class QuickieController : MonoBehaviour
     void Update()
     {
         CameraLook();
-        Animate();
+        if(canMove) {
+            Animate();
+        }
         //transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
         Debug.DrawRay(transform.position,Vector3.down);

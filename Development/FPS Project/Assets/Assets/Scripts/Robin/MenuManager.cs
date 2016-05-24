@@ -29,11 +29,12 @@ public class MenuManager : MonoBehaviour {
 
 	public void EnableDisableMenu () {
 		Camera.main.GetComponent<DepthOfField>().enabled = showMenu;
-		Cursor.visible = showMenu;
+		Cursor.visible = showMenu;				
 		leftCanvas.SetActive(showMenu);
 		optionMenu.SetActive(false);
 		showOptions = true;
 		showMenu = !showMenu;
+		player.GetComponent<QuickieController>().canMove = showMenu;
 	}
 
 	public void EnableDisableOptions () {

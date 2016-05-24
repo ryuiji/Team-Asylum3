@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Inspect : MonoBehaviour {
+	public GameObject player;
 	public float rayDistance;
 	public GameObject inspectText;
 	public GameObject inspectCanvas;
@@ -111,10 +112,10 @@ public class Inspect : MonoBehaviour {
 	}
 
 	void DisableMovement () {
-		//
+		player.GetComponent<QuickieController>().canMove = false;
 	}
 
 	void EnableMovement () {
-		//
+		player.GetComponent<QuickieController>().canMove = false;
 	}
 }

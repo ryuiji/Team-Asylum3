@@ -10,7 +10,7 @@ public class OptionManager : MonoBehaviour {
 	public GameObject controls;
 	public GameObject[] allOptions;
 
-	public GameObject graphicDropdown; // De toggle
+	public GameObject graphicDropdown; // toggle
 	public GameObject antiAliasing; // Toggle
 	public GameObject bloom; // Toggle
 
