@@ -33,7 +33,6 @@ public partial class LightShafts : MonoBehaviour
 
 	float GetFrustumApex()
 	{
-		// Assuming the frustum is inscribed in a unit cube centered at 0
 		return - m_SpotNear/(m_SpotFar - m_SpotNear) - 0.5f;
 	}
 
@@ -60,15 +59,12 @@ public partial class LightShafts : MonoBehaviour
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			// Skip one or two quarters, if the light is off screen
 			if (i == 0 && lightPos.y > 1 ||
 				i == 1 && lightPos.x > 1 ||
 				i == 2 && lightPos.y < -1 ||
 				i == 3 && lightPos.x < -1)
 				continue;
 
-			// index denotes which quarter of the screen to take up,
-			// so start at -1, -0.5, 0 or 0.5
 			float top = i / 2.0f - 1.0f;
 			float bottom = top + 0.5f;
 			GL.Begin(GL.QUADS);
