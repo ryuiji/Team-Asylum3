@@ -26,7 +26,13 @@ public class Hallicunation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(door!=null)
+        CheckPlayer();
+    }
+    
+
+    public void CheckPlayer()
+    {
+        if (door != null)
         {
             if (Vector3.Distance(door.transform.position, gunManager.gameObject.transform.position) < 3)
             {
@@ -36,8 +42,6 @@ public class Hallicunation : MonoBehaviour
                 doorParticle.Play();
             }
         }
-
-
     }
 
     public void FadeImageIn(CanvasGroup image, float amount)
