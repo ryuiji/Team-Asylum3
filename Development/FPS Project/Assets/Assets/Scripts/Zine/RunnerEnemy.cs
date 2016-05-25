@@ -79,7 +79,7 @@ public class RunnerEnemy : EnemyAbstract
     public override IEnumerator Attack()
     {
     	hitParticle.Play();
-        player.GetComponent<MakeShiftHp>().TakeDamage(damage);
+        player.GetComponent<PlayerStats2>().TakeDamage(damage);
         audioSource.PlayOneShot(hitSound);
         StartCoroutine("AttackCoolDown");
         return null;
