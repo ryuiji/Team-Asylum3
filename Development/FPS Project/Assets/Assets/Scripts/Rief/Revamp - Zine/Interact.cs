@@ -22,6 +22,9 @@ public class Interact : MonoBehaviour
             case InteractableEnum.Door:
                 hit.transform.GetComponent<Door2>().UseDoor();
                 break;
+            case InteractableEnum.Battery:
+                hit.transform.GetComponent<Battery2>().AddPower();
+                break;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum InteractableEnum { Door };
+public enum InteractableEnum { Door, Battery };
 
 public class Interactable2 : MonoBehaviour
 {
