@@ -17,5 +17,9 @@ public class Door2 : MonoBehaviour
     public void UseDoor()
     {
         door.SetTrigger("Door");
+        /*
+
+			UI UPDATE
+        */
     }
 }
