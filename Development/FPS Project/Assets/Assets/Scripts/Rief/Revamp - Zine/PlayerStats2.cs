@@ -46,7 +46,7 @@ public class PlayerStats2 : MonoBehaviour
         hp -= damageTaken;
         if (hp <= 0)
         {
-            StartCoroutine(Death());
+            Death();
         }
         hpText.text = hp.ToString("F0");
         allowedRegen = hp + regenAmount;
@@ -74,11 +74,17 @@ public class PlayerStats2 : MonoBehaviour
     }
 
 
-    IEnumerator Death()
+    IEnumerator DeathSuicide()
     {
         GetComponent<QuickieController>().enabled = false;
         anim.SetBool("Suicide", true);
         yield return new WaitForSeconds(2.6f);
+        acces.ActivateDeath = true;
+    }
+
+    void Death()
+    {
+        GetComponent<QuickieController>().enabled = false;
         acces.ActivateDeath = true;
     }
 }

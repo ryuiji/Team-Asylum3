@@ -7,8 +7,14 @@ public class RunnerEnemy : EnemyAbstract
     public float sprintSpeed;
     public ParticleSystem hitParticle;
     public GameObject playerRCObj;
+    public Animator anim;
+    public PlayerStats2 playStats;
+    public GameObject mainCam;
+    public bool playerIsDead;
     void Start()
     {
+        playStats = player.GetComponent<PlayerStats2>();
+        anim=GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         player = GameObject.Find("Player");
@@ -17,7 +23,11 @@ public class RunnerEnemy : EnemyAbstract
 
     void Update()
     {
-        CheckForPlayer();
+        if (!playerIsDead)
+        {
+            CheckForPlayer();
+        }
+
     }
 
     public override void CheckForPlayer()
@@ -62,6 +72,7 @@ public class RunnerEnemy : EnemyAbstract
 
     public override void Aggro()
     {
+        anim.SetBool("Detect Enemy", true);
         aggrod = true;
         agent.SetDestination(player.transform.position);
         agent.Resume();
@@ -74,15 +85,39 @@ public class RunnerEnemy : EnemyAbstract
         audioSource.PlayOneShot(screamSound);
         yield return new WaitForSeconds(0.1f);
         agent.speed=sprintSpeed;
+        anim.SetBool("Run", true);
     }
 
     public override IEnumerator Attack()
     {
-    	hitParticle.Play();
-        player.GetComponent<PlayerStats2>().TakeDamage(damage);
+        transform.LookAt(player.transform);
+        hitParticle.Play();
+        if(playStats.hp<damage)
+        {
+            playerIsDead = true;
+            agent.speed=0;
+            agent.Stop();
+            player.GetComponent<QuickieController>().enabled=false;
+            player.transform.LookAt(this.transform);
+            anim.SetTrigger("Grab");
+            yield return new WaitForSeconds(1f);
+            anim.SetBool("Run", false);
+            anim.SetBool("Detect Enemy", false);
+            aggrod = false;
+            playStats.TakeDamage((int) playStats.hp);
+            anim.SetBool("Cry scene",true);
+            playStats.enabled=false;
+            yield return new WaitForSeconds(1f);
+            mainCam.transform.LookAt(transform);
+            yield break;
+        }
+        else
+        {
+            anim.SetTrigger("Attack01");
+        }
+        playStats.TakeDamage(damage);
         audioSource.PlayOneShot(hitSound);
         StartCoroutine("AttackCoolDown");
-        return null;
     }
 
     public override IEnumerator AttackCoolDown()
@@ -99,15 +134,18 @@ public class RunnerEnemy : EnemyAbstract
 
     public override void DeAggro()
     {
+        anim.SetBool("Detect Enemy", false);
         aggrod = false;
         agent.Stop();
     }
 
     public override IEnumerator Death()
     {
-        //play anim
-        yield return new WaitForSeconds(0.1f);  //anim length
-        Destroy(this.gameObject);
+        agent.Stop();
+        GetComponent<Collider>().enabled=false;
+        GetComponent<smileyDeath>().ActivateDeath=true;
+        this.enabled=false;
+        yield return new WaitForSeconds(2f);  //anim length
     }
 
     public override void Roam()
@@ -118,6 +156,7 @@ public class RunnerEnemy : EnemyAbstract
 
     public override void TakeDamage(int damage)
     {
+        anim.SetTrigger("Hit Heavy DMG");
         health -= damage;
         if (health <= 0)
         {
