@@ -8,7 +8,6 @@ public class Interact : MonoBehaviour
     {
         if(Input.GetButtonDown("Use") && Physics.Raycast(transform.position,transform.forward,out hit, 5f))
         {
-        	Debug.Log("1");
             if(hit.transform.GetComponent<Interactable2>()!=null)
             {
                 InteractObj();
@@ -25,6 +24,9 @@ public class Interact : MonoBehaviour
                 break;
             case InteractableEnum.Battery:
                 hit.transform.GetComponent<Battery2>().AddPower();
+                break;
+            case InteractableEnum.Key:
+                GameObject.Find("FinalDoor").GetComponent<KeyManager>().AddOneKey();
                 break;
         }
     }
