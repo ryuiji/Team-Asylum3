@@ -171,8 +171,8 @@ public class Gunmanage : MonoBehaviour
             ClearDelegates();
             EmptyAnimation();
             print("switched to empty");
-            currAmountText.text="0";
-            looseAmountText.text="0";
+            //currAmountText.text="0";
+            //looseAmountText.text="0";
             gunName.text= "Unarmed";
 
         }
