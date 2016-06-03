@@ -8,6 +8,7 @@ public class Door2 : MonoBehaviour
 
     void Start()
     {
+        door=GetComponent<Animator>();
         if(open)
         {
             UseDoor();

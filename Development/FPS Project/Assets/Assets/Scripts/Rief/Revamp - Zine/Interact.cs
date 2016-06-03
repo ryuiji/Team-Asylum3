@@ -8,6 +8,7 @@ public class Interact : MonoBehaviour
     {
         if(Input.GetButtonDown("Use") && Physics.Raycast(transform.position,transform.forward,out hit, 5f))
         {
+        	Debug.Log("1");
             if(hit.transform.GetComponent<Interactable2>()!=null)
             {
                 InteractObj();
