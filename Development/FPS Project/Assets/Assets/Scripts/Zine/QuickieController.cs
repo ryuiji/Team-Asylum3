@@ -56,6 +56,7 @@ public class QuickieController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetRot();
         CameraLook();
         if(canMove) {
             Animate();
@@ -64,6 +65,16 @@ public class QuickieController : MonoBehaviour
         transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
         Debug.DrawRay(transform.position,Vector3.down);
 
+    }
+
+
+    void GetRot()
+    {
+        Vector3 direc = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical"));
+        //direc+=transform.position;
+        Quaternion lookRot = Quaternion.LookRotation(direc);
+        print(direc*10);
+        Debug.DrawRay(transform.position,-direc*10,Color.red);      
     }
 
 

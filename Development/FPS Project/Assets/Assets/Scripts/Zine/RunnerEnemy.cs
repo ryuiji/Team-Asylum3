@@ -101,14 +101,13 @@ public class RunnerEnemy : EnemyAbstract
             player.transform.LookAt(this.transform);
             anim.SetTrigger("Grab");
             yield return new WaitForSeconds(1f);
+            audioSource.PlayOneShot(hitSound);
             anim.SetBool("Run", false);
             anim.SetBool("Detect Enemy", false);
             aggrod = false;
             playStats.TakeDamage((int) playStats.hp);
             anim.SetBool("Cry scene",true);
             playStats.enabled=false;
-            yield return new WaitForSeconds(1f);
-            mainCam.transform.LookAt(transform);
             yield break;
         }
         else
