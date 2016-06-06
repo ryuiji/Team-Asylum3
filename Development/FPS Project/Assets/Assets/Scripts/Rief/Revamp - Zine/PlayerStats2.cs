@@ -16,6 +16,8 @@ public class PlayerStats2 : MonoBehaviour
     public float regenWait;
     private bool mayRegen;
     public bool isGettingExecuted;
+    public AudioClip suicideSound;
+    public GameObject particle;
 
     [Header("User Interface")]
     public Text hpText;
@@ -36,6 +38,10 @@ public class PlayerStats2 : MonoBehaviour
         if(mayRegen)
         {
             Regen();
+        }
+        if(sanity==maxSanity && isGettingExecuted==false)
+        {
+            StartCoroutine("DeathSuicide");
         }
     }
 
@@ -77,9 +83,12 @@ public class PlayerStats2 : MonoBehaviour
 
     IEnumerator DeathSuicide()
     {
+        isGettingExecuted=true;
         GetComponent<QuickieController>().enabled = false;
         anim.SetBool("Suicide", true);
         yield return new WaitForSeconds(2.6f);
+        Instantiate(particle,transform.position,transform.rotation);
+        GetComponent<AudioSource>().PlayOneShot(suicideSound);
         acces.ActivateDeath = true;
     }
 

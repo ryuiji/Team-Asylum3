@@ -7,6 +7,14 @@ public class Puzzle : MonoBehaviour
     public PlayerStats2 player;
     public Hallicunation hall;
 
+    void Update()
+    {
+        if(Input.GetButtonDown("Jump"))
+        {
+            StartPuzzle();
+        }
+    }
+
     void StartPuzzle()
     {
         door.SetTrigger("Door");
@@ -14,15 +22,15 @@ public class Puzzle : MonoBehaviour
 
     public void Bottle(int i)
     {
-        if(i==0)
+        if(i==1)
         {
             player.sanity=player.maxSanity;
         }
-        if(i==1)
+        if(i==2)
         {
             hall.StartHall();
         }
-        if(i==2)
+        if(i==3)
         {
             door.SetTrigger("Door");
         }

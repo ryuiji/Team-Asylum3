@@ -30,6 +30,9 @@ public class Interact : MonoBehaviour
                 GameObject.Find("FinalDoor").GetComponent<KeyManager>().AddOneKey();
                 Destroy(hit.transform.gameObject);
                 break;
+            case InteractableEnum.Bottle:
+                hit.transform.GetComponent<Bottle2>().UseBottle();
+                break;
         }
     }
 }
