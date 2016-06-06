@@ -31,11 +31,10 @@ public class QuickieController : MonoBehaviour
     public float lookSmoothDamp = 0.1f;
     public Transform body;
 
-    // Use this for initialization
     void Start()
     {
         canMove = true;
-        Cursor.lockState=CursorLockMode.Locked;
+        //Cursor.lockState=CursorLockMode.Locked;
         Cursor.visible=false;
     }
 
@@ -56,18 +55,17 @@ public class QuickieController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetRot();
-        CameraLook();
         if(canMove) {
             Animate();
+            CameraLook();
+            GetRot();
+            transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
         }
         if (!Raycast())
         {
             transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
         }
-
-        transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
-        Debug.DrawRay(transform.position,Vector3.down);
+        //Debug.DrawRay(transform.position,Vector3.down);
 
     }
 
