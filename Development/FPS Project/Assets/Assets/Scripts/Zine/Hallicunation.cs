@@ -18,30 +18,11 @@ public class Hallicunation : MonoBehaviour
     public NoiseAndGrain noise;
     public GameObject door;
     public ParticleSystem doorParticle;
-    // Use this for initialization
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        CheckPlayer();
-    }
     
 
-    public void CheckPlayer()
+    public void StartHall()
     {
-        if (door != null)
-        {
-            if (Vector3.Distance(door.transform.position, gunManager.gameObject.transform.position) < 3)
-            {
-                StartCoroutine("HallicunationOne", groupOne);
-                Destroy(door);
-                bangSource.PlayOneShot(audioBang);
-                doorParticle.Play();
-            }
-        }
+        StartCoroutine("Blackout", blackOut);
     }
 
     public void FadeImageIn(CanvasGroup image, float amount)
@@ -60,35 +41,6 @@ public class Hallicunation : MonoBehaviour
         {
             image.alpha = 0;
         }
-    }
-
-
-
-    public IEnumerator HallicunationOne(CanvasGroup canvasgroup)
-    {
-        GetComponent<AudioSource>().PlayOneShot(hallicunation1ScreamSound);
-        while (canvasgroup.alpha < 1f)
-        {
-            canvasgroup.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
-            FadeImageIn(canvasgroup, 1);
-            FadeImageIn(blackOut, 2);
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        GetComponent<AudioSource>().Stop();
-        yield return new WaitForSeconds(1f);
-        canvasgroup.alpha = 0;
-        StartCoroutine("BlackOutOne");
-
-    }
-
-
-
-    public IEnumerator BlackOutOne()
-    {
-        yield return null;
-        StartCoroutine("Blackout",blackOut);
-        
     }
 
     public IEnumerator Blackout(CanvasGroup canvasGroup)

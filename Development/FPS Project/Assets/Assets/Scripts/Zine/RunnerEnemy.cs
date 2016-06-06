@@ -92,8 +92,9 @@ public class RunnerEnemy : EnemyAbstract
     {
         transform.LookAt(player.transform);
         hitParticle.Play();
-        if(playStats.hp<damage)
+        if(playStats.hp<damage && playStats.isGettingExecuted==false)
         {
+            playStats.isGettingExecuted=true;
             playerIsDead = true;
             agent.speed=0;
             agent.Stop();

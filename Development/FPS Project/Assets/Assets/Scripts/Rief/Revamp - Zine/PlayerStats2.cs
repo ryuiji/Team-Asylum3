@@ -15,6 +15,7 @@ public class PlayerStats2 : MonoBehaviour
     private float allowedRegen;
     public float regenWait;
     private bool mayRegen;
+    public bool isGettingExecuted;
 
     [Header("User Interface")]
     public Text hpText;

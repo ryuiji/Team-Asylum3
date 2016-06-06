@@ -61,20 +61,29 @@ public class QuickieController : MonoBehaviour
         if(canMove) {
             Animate();
         }
-        //transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+        if (!Raycast())
+        {
+            transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+        }
+
         transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
         Debug.DrawRay(transform.position,Vector3.down);
 
     }
 
 
-    void GetRot()
+    Vector3 GetRot()
     {
-        Vector3 direc = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical"));
-        //direc+=transform.position;
-        Quaternion lookRot = Quaternion.LookRotation(direc);
-        print(direc*10);
-        Debug.DrawRay(transform.position,-direc*10,Color.red);      
+        float vert = Input.GetAxis("Vertical");
+        float hor = Input.GetAxis("Horizontal");
+        Vector3 dir = new Vector3(hor,0,vert);
+        Debug.DrawRay(transform.position,new Vector3(hor,0,vert), Color.red);
+        return dir;
+        //Vector3 direc = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical"));
+        ////direc+=transform.position;
+        //Quaternion lookRot = Quaternion.LookRotation(direc);
+        //print(direc*10);
+        //Debug.DrawRay(transform.position,-direc*10,Color.red);      
     }
 
 
@@ -82,68 +91,68 @@ public class QuickieController : MonoBehaviour
     public void Animate()
     {
 
-        if(Input.GetAxis("Horizontal")>0)
-        {
-            anim.SetBool("Walk",false);
-            anim.SetBool("strafe R",true);
-            anim.SetBool("strafe L",false);
-            if(Raycast(transform.right))
-            {
-                print("Hit something");
-            }
-            else
-            {
-                transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*moveSpeed,0,0);
-            }
-        }
-        if (Input.GetAxis("Horizontal")<0)
-        {
-            anim.SetBool("Walk", false);
-            anim.SetBool("strafe L", true);
-            anim.SetBool("strafe R", false);
-            if (Raycast(-transform.right))
-            {
-                print("Hit something");
-            }
-            else
-            {
-                transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0);
-            }
-        }
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            anim.SetBool("strafe R", false);
-            anim.SetBool("strafe L", false);
-            anim.SetBool("Walk", true);
-            if (Raycast(transform.forward))
-            {
-                print("Hit something");
-            }
-            else
-            {
-                transform.Translate(0,0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
-            }
-        }
-        if (Input.GetAxis("Vertical") < 0)
-        {
-            anim.SetBool("strafe R", false);
-            anim.SetBool("strafe L", false);
-            anim.SetBool("Walk", true);
-            if (Raycast(-transform.forward))
-            {
-                print("Hit something");
-            }
-            else
-            {
-                transform.Translate(0, 0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
-            }
-        }
+        //if(Input.GetAxis("Horizontal")>0)
+        //{
+        //    anim.SetBool("Walk",false);
+        //    anim.SetBool("strafe R",true);
+        //    anim.SetBool("strafe L",false);
+        //    if(Raycast())
+        //    {
+        //        print("Hit something");
+        //    }
+        //    else
+        //    {
+        //        transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*moveSpeed,0,0);
+        //    }
+        //}
+        //if (Input.GetAxis("Horizontal")<0)
+        //{
+        //    anim.SetBool("Walk", false);
+        //    anim.SetBool("strafe L", true);
+        //    anim.SetBool("strafe R", false);
+        //    if (Raycast())
+        //    {
+        //        print("Hit something");
+        //    }
+        //    else
+        //    {
+        //        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0);
+        //    }
+        //}
+        //if (Input.GetAxis("Vertical") > 0)
+        //{
+        //    anim.SetBool("strafe R", false);
+        //    anim.SetBool("strafe L", false);
+        //    anim.SetBool("Walk", true);
+        //    if (Raycast())
+        //    {
+        //        print("Hit something");
+        //    }
+        //    else
+        //    {
+        //        transform.Translate(0,0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
+        //    }
+        //}
+        //if (Input.GetAxis("Vertical") < 0)
+        //{
+        //    anim.SetBool("strafe R", false);
+        //    anim.SetBool("strafe L", false);
+        //    anim.SetBool("Walk", true);
+        //    if (Raycast())
+        //    {
+        //        print("Hit something");
+        //    }
+        //    else
+        //    {
+        //        transform.Translate(0, 0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
+        //    }
+        //}
     }
 
 
-    bool Raycast(Vector3 dir)
+    bool Raycast()
     {
-        if(Physics.Raycast(rayCastObj.transform.position,dir,out hit, 0.5f) && hit.transform.tag!="PlayerPart")
+        if(Physics.Raycast(rayCastObj.transform.position,GetRot(),out hit, 1f) && hit.transform.tag!="PlayerPart")
         {
             print(hit.transform.name);
             return true;
