@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class KeyManager : MonoBehaviour {
 
-	public GameObject[] spawnPoints;
+	public List<GameObject> spawnPoints = new List<GameObject>();
 	public GameObject key;
 	public int maxKeySpawn;
 	public int currentKeys;
+	private int randomNumber;
 
 	void Start () {
 		StartSpawning();
@@ -14,7 +16,9 @@ public class KeyManager : MonoBehaviour {
 
 	void StartSpawning () {
 		for(int i = 0; i < maxKeySpawn; i++) {
-			Instantiate(key, spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position, Quaternion.identity);
+			randomNumber = Random.Range(0, spawnPoints.Count);
+			Instantiate(key, spawnPoints[randomNumber].transform.position, Quaternion.identity);
+			spawnPoints.RemoveAt(randomNumber);
 		}
 	}
 

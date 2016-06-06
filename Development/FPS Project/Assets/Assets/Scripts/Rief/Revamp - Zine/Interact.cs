@@ -6,6 +6,7 @@ public class Interact : MonoBehaviour
     public RaycastHit hit;
     void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward, Color.green);
         if(Input.GetButtonDown("Use") && Physics.Raycast(transform.position,transform.forward,out hit, 5f))
         {
             if(hit.transform.GetComponent<Interactable2>()!=null)
@@ -27,6 +28,7 @@ public class Interact : MonoBehaviour
                 break;
             case InteractableEnum.Key:
                 GameObject.Find("FinalDoor").GetComponent<KeyManager>().AddOneKey();
+                Destroy(hit.transform.gameObject);
                 break;
         }
     }
