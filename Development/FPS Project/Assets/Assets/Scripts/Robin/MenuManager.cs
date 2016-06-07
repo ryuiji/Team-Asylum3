@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour {
 		showOptions = true;
 		showMenu = !showMenu;
 		player.GetComponent<QuickieController>().canMove = showMenu;
+		
 	}
 
 	public void EnableDisableOptions () {

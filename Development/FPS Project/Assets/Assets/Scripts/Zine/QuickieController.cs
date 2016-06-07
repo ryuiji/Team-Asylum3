@@ -61,32 +61,13 @@ public class QuickieController : MonoBehaviour
             CameraLook();
             transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
             transform.Translate(Input.GetAxis("Horizontal")*moveSpeed*Time.deltaTime,0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+            if(Input.GetAxis("Vertical")==0 && Input.GetAxis("Horizontal")==0)
+            {
+                rigid.velocity=Vector3.zero;
+            }
         }
 
     }
-
-
-
-    //public void FixedUpdate()
-    //{
-    //    if (Input.GetAxis("Vertical") > 0)
-    //    {
-    //        rigid.velocity += transform.forward*moveSpeed*Time.deltaTime;
-    //    }
-    //    if (Input.GetAxis("Vertical") < 0)
-    //    {
-    //        rigid.velocity -= transform.forward*moveSpeed * Time.deltaTime;
-    //    }
-    //    if (Input.GetAxis("Horizontal") > 0)
-    //    {
-    //        rigid.velocity += transform.right*moveSpeed * Time.deltaTime;
-    //    }
-    //    if (Input.GetAxis("Horizontal") < 0)
-    //    {
-    //        rigid.velocity -= transform.right* moveSpeed * Time.deltaTime;
-    //    }
-
-    //}
 
 
     public float ClampAngle(float angle, float min, float max)

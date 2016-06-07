@@ -30,7 +30,7 @@ public class PlayerStats2 : MonoBehaviour
 
     public void Start()
     {
-        hpText.text = hp.ToString("F0");
+        //hpText.text = hp.ToString("F0");
         movement.moveSpeed=moveSpeed;
     }
 
@@ -86,7 +86,7 @@ public class PlayerStats2 : MonoBehaviour
     {
         gun.enabled=false;
         isGettingExecuted=true;
-        GetComponent<QuickieController>().enabled = false;
+        movement.enabled = false;
         anim.SetBool("Suicide", true);
         yield return new WaitForSeconds(2.6f);
         Instantiate(particle,transform.position,transform.rotation);
