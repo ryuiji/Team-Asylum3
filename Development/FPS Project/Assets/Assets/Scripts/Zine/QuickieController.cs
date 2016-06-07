@@ -19,6 +19,7 @@ public class QuickieController : MonoBehaviour
     public Rigidbody rigid;
     public Animator anim;
     public Transform rayCastObj;
+    public Transform collisionObj;
 
     [Header("Camera Vars")]
     public float lookSensitivity = 5;
@@ -35,7 +36,7 @@ public class QuickieController : MonoBehaviour
     {
         canMove = true;
         //Cursor.lockState=CursorLockMode.Locked;
-        Cursor.visible=false;
+        Cursor.visible = false;
     }
 
     void CameraLook()
@@ -55,111 +56,38 @@ public class QuickieController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canMove) {
-            Animate();
+        if (canMove)
+        {
             CameraLook();
-            GetRot();
             transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSpeedX * Time.deltaTime, 0);
+            transform.Translate(Input.GetAxis("Horizontal")*moveSpeed*Time.deltaTime,0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
         }
-        if (!Raycast())
-        {
-            transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
-        }
-        //Debug.DrawRay(transform.position,Vector3.down);
 
     }
 
 
-    Vector3 GetRot()
-    {
-        float vert = Input.GetAxis("Vertical");
-        float hor = Input.GetAxis("Horizontal");
-        Vector3 dir = new Vector3(hor,0,vert);
-        Debug.DrawRay(transform.position,new Vector3(hor,0,vert), Color.red);
-        return dir;
-        //Vector3 direc = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical"));
-        ////direc+=transform.position;
-        //Quaternion lookRot = Quaternion.LookRotation(direc);
-        //print(direc*10);
-        //Debug.DrawRay(transform.position,-direc*10,Color.red);      
-    }
 
+    //public void FixedUpdate()
+    //{
+    //    if (Input.GetAxis("Vertical") > 0)
+    //    {
+    //        rigid.velocity += transform.forward*moveSpeed*Time.deltaTime;
+    //    }
+    //    if (Input.GetAxis("Vertical") < 0)
+    //    {
+    //        rigid.velocity -= transform.forward*moveSpeed * Time.deltaTime;
+    //    }
+    //    if (Input.GetAxis("Horizontal") > 0)
+    //    {
+    //        rigid.velocity += transform.right*moveSpeed * Time.deltaTime;
+    //    }
+    //    if (Input.GetAxis("Horizontal") < 0)
+    //    {
+    //        rigid.velocity -= transform.right* moveSpeed * Time.deltaTime;
+    //    }
 
+    //}
 
-    public void Animate()
-    {
-
-        //if(Input.GetAxis("Horizontal")>0)
-        //{
-        //    anim.SetBool("Walk",false);
-        //    anim.SetBool("strafe R",true);
-        //    anim.SetBool("strafe L",false);
-        //    if(Raycast())
-        //    {
-        //        print("Hit something");
-        //    }
-        //    else
-        //    {
-        //        transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*moveSpeed,0,0);
-        //    }
-        //}
-        //if (Input.GetAxis("Horizontal")<0)
-        //{
-        //    anim.SetBool("Walk", false);
-        //    anim.SetBool("strafe L", true);
-        //    anim.SetBool("strafe R", false);
-        //    if (Raycast())
-        //    {
-        //        print("Hit something");
-        //    }
-        //    else
-        //    {
-        //        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0);
-        //    }
-        //}
-        //if (Input.GetAxis("Vertical") > 0)
-        //{
-        //    anim.SetBool("strafe R", false);
-        //    anim.SetBool("strafe L", false);
-        //    anim.SetBool("Walk", true);
-        //    if (Raycast())
-        //    {
-        //        print("Hit something");
-        //    }
-        //    else
-        //    {
-        //        transform.Translate(0,0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
-        //    }
-        //}
-        //if (Input.GetAxis("Vertical") < 0)
-        //{
-        //    anim.SetBool("strafe R", false);
-        //    anim.SetBool("strafe L", false);
-        //    anim.SetBool("Walk", true);
-        //    if (Raycast())
-        //    {
-        //        print("Hit something");
-        //    }
-        //    else
-        //    {
-        //        transform.Translate(0, 0,Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
-        //    }
-        //}
-    }
-
-
-    bool Raycast()
-    {
-        if(Physics.Raycast(rayCastObj.transform.position,GetRot(),out hit, 1f) && hit.transform.tag!="PlayerPart")
-        {
-            print(hit.transform.name);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 
     public float ClampAngle(float angle, float min, float max)
     {

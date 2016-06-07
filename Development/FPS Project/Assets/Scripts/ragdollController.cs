@@ -10,19 +10,29 @@ public class ragdollController : MonoBehaviour {
 
 
 	void Start () {
-
 		bones = gameObject.GetComponentsInChildren<Rigidbody> (); 
 		anim = GetComponent<Animator> ();
-
-
-	}
-	void Update ()
+        StartGame();
+        GetComponent<Rigidbody>().isKinematic=false;
+        GetComponent<Collider>().enabled = true;
+    }
+    void Update ()
 
 	{
 		if (isDead)
 			killRagdoll ();
 
 	}
+
+    void StartGame()
+    {
+        foreach(Rigidbody ragdoll in bones)
+        {
+            ragdoll.gameObject.GetComponent<Collider>().enabled=false;
+            print("DidOne");
+            ragdoll.isKinematic=true;
+        }
+    }
 
 
 	void killRagdoll () 

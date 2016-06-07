@@ -26,6 +26,7 @@ public class PlayerStats2 : MonoBehaviour
     public Animator anim;
     public AccesScript acces;
     public QuickieController movement;
+    public Gunmanage gun;
 
     public void Start()
     {
@@ -83,6 +84,7 @@ public class PlayerStats2 : MonoBehaviour
 
     IEnumerator DeathSuicide()
     {
+        gun.enabled=false;
         isGettingExecuted=true;
         GetComponent<QuickieController>().enabled = false;
         anim.SetBool("Suicide", true);
@@ -94,6 +96,7 @@ public class PlayerStats2 : MonoBehaviour
 
     void Death()
     {
+        gun.enabled=false;
         GetComponent<QuickieController>().enabled = false;
         acces.ActivateDeath = true;
     }
