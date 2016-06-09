@@ -9,10 +9,7 @@ public class Puzzle : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButtonDown("Jump"))
-        {
-            StartPuzzle();
-        }
+
     }
 
     void StartPuzzle()
@@ -35,4 +32,13 @@ public class Puzzle : MonoBehaviour
             door.SetTrigger("Door");
         }
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.tag=="PuzzleStart")
+        {
+            StartPuzzle();
+        }
+    }
+
 }
