@@ -170,7 +170,7 @@ public class RunnerEnemy : EnemyAbstract
         if (Physics.Linecast(transform.position, playerRCObj.transform.position, out hit))
         {
             print(hit.transform.name);
-            if (hit.transform.tag == "PlayerPart")
+            if (hit.transform.tag == "Player")
             {
                 return true;
             }

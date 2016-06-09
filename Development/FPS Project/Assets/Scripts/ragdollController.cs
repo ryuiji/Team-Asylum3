@@ -37,9 +37,12 @@ public class ragdollController : MonoBehaviour {
 
 	void killRagdoll () 
 	{
-		foreach (Rigidbody ragdoll in bones)
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Collider>().enabled = false;
+        foreach (Rigidbody ragdoll in bones)
 		{
-			ragdoll.isKinematic = false;
+            ragdoll.gameObject.GetComponent<Collider>().enabled = true;
+            ragdoll.isKinematic = false;
 		}
 
 		anim.enabled = false;
