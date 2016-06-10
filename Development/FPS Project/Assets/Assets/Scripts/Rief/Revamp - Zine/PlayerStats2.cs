@@ -84,6 +84,9 @@ public class PlayerStats2 : MonoBehaviour
 
     IEnumerator DeathSuicide()
     {
+    	gun.EmptyAnimation();
+    	gun.anim.SetBool("Hgun Equip", true);
+    	yield return new WaitForSeconds(1f);
         gun.enabled=false;
         isGettingExecuted=true;
         movement.enabled = false;

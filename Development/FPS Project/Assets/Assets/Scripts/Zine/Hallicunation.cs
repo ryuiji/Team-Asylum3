@@ -5,9 +5,6 @@ using System.Collections;
 
 public class Hallicunation : MonoBehaviour
 {
-    public AudioClip audioBang;
-    public AudioSource bangSource;
-    public AudioClip hallicunation1ScreamSound;
     public AudioClip hallicunationPantSound;
     public AudioSource audioSourceHall1;
     public CanvasGroup blackOut;
@@ -16,8 +13,6 @@ public class Hallicunation : MonoBehaviour
     public Gunmanage gunManager;
     public Vortex vortex;
     public NoiseAndGrain noise;
-    public GameObject door;
-    public ParticleSystem doorParticle;
     
 
     public void StartHall()

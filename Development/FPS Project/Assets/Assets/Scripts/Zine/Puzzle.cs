@@ -6,6 +6,7 @@ public class Puzzle : MonoBehaviour
     public Animator door;
     public PlayerStats2 player;
     public Hallicunation hall;
+    bool started;
 
     void Update()
     {
@@ -35,8 +36,9 @@ public class Puzzle : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag=="PuzzleStart")
+        if(other.transform.tag=="PuzzlePart" && started==false)
         {
+            started=true;
             StartPuzzle();
         }
     }
