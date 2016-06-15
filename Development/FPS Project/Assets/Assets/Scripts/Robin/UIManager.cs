@@ -1,0 +1,75 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+
+public class UIManager : MonoBehaviour {
+
+	public GameObject options;
+	public GameObject credits;
+
+	public GameObject graphics;
+	public GameObject audio;
+	public GameObject controls;
+
+	public GameObject[] allOptions;
+
+	private bool showMenu = true;
+	private bool showCredits = true;
+
+	void DisableAll () {
+		for(int i = 0; i < allOptions.Length; i++) {
+			allOptions[i].SetActive(false);
+		}
+	}
+
+	public void Back () {
+		options.SetActive(false);
+		ResetBool();
+	}
+
+	public void StartGame () {
+		SceneManager.LoadScene("MainBuild");
+	}
+
+	public void ExitGame () {
+		Application.Quit();
+	}
+
+	public void Options () {
+		options.SetActive(showMenu);
+		showMenu = !showMenu;
+	}
+
+	public void Credits () {
+		credits.SetActive(showCredits);
+		showCredits = !showCredits;
+	}
+
+	public void Graphics () {
+		DisableAll();
+		graphics.SetActive(true);
+	}
+
+	public void Audio () {
+		DisableAll();
+		audio.SetActive(true);
+	}
+
+	public void Controls () {
+		DisableAll();
+		controls.SetActive(true);
+	}
+
+	public void IncreaseGraphics () {
+		QualitySettings.IncreaseLevel(false);
+	}
+
+	public void DecreaseGraphics () {
+		QualitySettings.DecreaseLevel(false);
+	}
+
+	private void ResetBool () {
+		showMenu = true;
+		showCredits = true;
+	}
+}
