@@ -44,7 +44,7 @@ public class Inspect : MonoBehaviour {
 	}
 
 	void ShootRay () {
-		Debug.DrawRay(transform.position, transform.forward, Color.red);
+		Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
 		if(Physics.Raycast(transform.position, transform.forward, out hit, rayDistance)) {
 			CheckTag(hit);
 		}else{
@@ -53,6 +53,7 @@ public class Inspect : MonoBehaviour {
 	}
 
 	void CheckTag (RaycastHit hit) {
+		Debug.Log("1");
 		if(hit.transform.tag == "Inspect") {
 			inspectText.SetActive(true);
 			if(Input.GetButtonDown("Use")) {

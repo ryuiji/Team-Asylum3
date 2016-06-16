@@ -37,11 +37,15 @@ public class UIManager : MonoBehaviour {
 
 	public void Options () {
 		options.SetActive(showMenu);
+		credits.SetActive(false);
+		showCredits = true;
 		showMenu = !showMenu;
 	}
 
 	public void Credits () {
+		options.SetActive(false);
 		credits.SetActive(showCredits);
+		showMenu = true;
 		showCredits = !showCredits;
 	}
 

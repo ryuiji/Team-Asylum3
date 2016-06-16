@@ -4,7 +4,8 @@ Old tv			Marc			Niet geupload		nee
 Newspaper		Marc			Niet geupload		nee
 Luxe chair		Marc			Niet geupload		nee
 
-Toilets			Carlo			Niet geupload		nee
+Toilets			Carlo			Wel geupload		//
+Toys			Carlo			Wel geupload		//
 Radio			Carlo			Niet geupload		nee
 Stuffed Animals		Carlo			Niet geupload		nee
 
