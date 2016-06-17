@@ -79,7 +79,7 @@ public class Inspect : MonoBehaviour {
 		inspectCanvas.SetActive(true);
 		SetObjectToTempLocation();
 		if(Input.GetButton("Fire1")) {
-			hit.transform.Rotate(-Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime, -Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime,0, Space.World);
+			hit.transform.Rotate(Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime, -Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime,0, Space.World);
 		}
 	}
 
