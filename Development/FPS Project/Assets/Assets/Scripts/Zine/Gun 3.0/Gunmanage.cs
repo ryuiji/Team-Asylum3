@@ -173,7 +173,7 @@ public class Gunmanage : MonoBehaviour
             print("switched to empty");
             //currAmountText.text="0";
             //looseAmountText.text="0";
-            gunName.text= "Unarmed";
+            //gunName.text= "Unarmed";
 
         }
         yield return new WaitForSeconds(2f);
@@ -259,9 +259,9 @@ public class Gunmanage : MonoBehaviour
 
     public void UpdateUI(float current, float loose, string name)
     {
-        currAmountText.text=current.ToString("F0");
-        looseAmountText.text=loose.ToString("F0");
-        gunName.text=name;
+        //currAmountText.text=current.ToString("F0");
+        //looseAmountText.text=loose.ToString("F0");
+        //gunName.text=name;
     }
 
     void ClearDelegates()
