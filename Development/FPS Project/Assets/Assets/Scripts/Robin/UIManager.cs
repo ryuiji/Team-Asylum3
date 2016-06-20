@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
+	public GameObject loadingScreen;
+
 	public GameObject options;
 	public GameObject credits;
 
@@ -15,6 +17,7 @@ public class UIManager : MonoBehaviour {
 
 	private bool showMenu = true;
 	private bool showCredits = true;
+
 
 	void DisableAll () {
 		for(int i = 0; i < allOptions.Length; i++) {
@@ -28,7 +31,7 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void StartGame () {
-		SceneManager.LoadScene("MainBuild");
+		StartCoroutine(StartLevel());
 	}
 
 	public void ExitGame () {
@@ -76,4 +79,12 @@ public class UIManager : MonoBehaviour {
 		showMenu = true;
 		showCredits = true;
 	}
+
+	public IEnumerator StartLevel() {
+        AsyncOperation async = Application.LoadLevelAsync("MainBuild");
+        loadingScreen.SetActive(true);
+        yield return async;
+        loadingScreen.SetActive(false);
+        SceneManager.LoadScene("MainBuild");
+    }
 }
