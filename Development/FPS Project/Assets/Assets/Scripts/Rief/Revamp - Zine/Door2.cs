@@ -16,6 +16,10 @@ public class Door2 : MonoBehaviour
         {
             UseDoor();
         }
+        if(!open)
+        {
+        	UseDoor();
+        }
     }
 
     IEnumerator Door()
