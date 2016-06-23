@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.ImageEffects;
 
 public class MenuManager : MonoBehaviour {
+	public GameObject background;
+	private bool canFade;
 	public GameObject player;
 	public GameObject leftCanvas;
 	public GameObject rightCanvas;
@@ -15,6 +17,8 @@ public class MenuManager : MonoBehaviour {
 	public bool canOpen;
 
 	void Awake () {
+		background.SetActive(true);
+		canFade = true;
 		Cursor.visible = false;
 		canOpen = true;
 	}
@@ -71,5 +75,8 @@ public class MenuManager : MonoBehaviour {
 
 	void Update () {
 		GetInput();
+		if(canFade) {
+			background.GetComponent<CanvasGroup>().alpha -= Time.deltaTime / 5;
+		}
 	}
 }

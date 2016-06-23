@@ -15,6 +15,7 @@ public class Puzzle : MonoBehaviour
 
     void StartPuzzle()
     {
+    	door.SetBool("OpenClose",false);
         door.SetTrigger("Door");
     }
 
@@ -30,6 +31,7 @@ public class Puzzle : MonoBehaviour
         }
         if(i==3)
         {
+        	door.SetBool("OpenClose",true);
             door.SetTrigger("Door");
         }
     }
