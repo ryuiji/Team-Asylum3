@@ -22,13 +22,13 @@ public class QuickieController : MonoBehaviour
     public Transform collisionObj;
 
     [Header("Camera Vars")]
-    public float lookSensitivity = 5;
-    public float yRotation;
-    public float xRotation;
-    public float curYrot;
-    public float curXrot;
-    public float yRotV;
-    public float xRotV;
+    private float lookSensitivity = 5;
+    private float yRotation;
+    private float xRotation;
+    private float curYrot;
+    private float curXrot;
+    private float yRotV;
+    private float xRotV;
     public float lookSmoothDamp = 0.1f;
     public Transform body;
 

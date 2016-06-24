@@ -52,8 +52,9 @@ public class PlayerStats2 : MonoBehaviour
         mayRegen=false;
         StopCoroutine("WaitForRegen");
         hp -= damageTaken;
-        if (hp <= 0)
+        if (hp <= 0.99f)
         {
+            hp=0;
             Death();
         }
         hpText.text = hp.ToString("F0");
