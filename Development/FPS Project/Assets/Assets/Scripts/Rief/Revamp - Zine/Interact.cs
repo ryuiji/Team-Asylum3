@@ -33,6 +33,9 @@ public class Interact : MonoBehaviour
             case InteractableEnum.Bottle:
                 hit.transform.GetComponent<Bottle2>().UseBottle();
                 break;
+            case InteractableEnum.ElectricSwitch:
+                hit.transform.GetComponent<ElectricSwitch>().StartCoroutine("Activate");
+                break;
         }
     }
 }
