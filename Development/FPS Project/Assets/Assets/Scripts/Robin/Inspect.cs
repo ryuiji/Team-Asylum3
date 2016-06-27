@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Inspect : MonoBehaviour {
 	public GameObject player;
+	public GameObject MenuManager;
 	public float rayDistance;
 	public GameObject inspectText;
 	public GameObject inspectCanvas;
@@ -86,6 +87,7 @@ public class Inspect : MonoBehaviour {
 		EnableMovement();
 		SetObjectToOldLocation();		
 		inspectCanvas.SetActive(false);
+		MenuManager.GetComponent<UIManager>().Resume();
 	}
 
 	void SetObjectToTempLocation () {
