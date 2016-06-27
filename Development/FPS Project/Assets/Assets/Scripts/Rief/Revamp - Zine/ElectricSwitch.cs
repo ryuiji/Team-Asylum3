@@ -25,8 +25,8 @@ public class ElectricSwitch : MonoBehaviour
 			active=true;
 			for(int i = 0; i<lights.Length; i++)
 			{
-				lights[i].GetComponent<GeneratorLight>().StartCoroutine("PowerOn");
 				lights[i].GetComponent<GeneratorLight>().StopCoroutine("PowerDown");
+				lights[i].GetComponent<GeneratorLight>().StartCoroutine("PowerOn");
 			}
 			audio.PlayOneShot(spark);
 			audio.PlayOneShot(switchOn);

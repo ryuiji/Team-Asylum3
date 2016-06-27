@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GeneratorLight : MonoBehaviour {
@@ -13,11 +13,12 @@ public class GeneratorLight : MonoBehaviour {
 	public IEnumerator PowerOn()
 	{
 		light.intensity=2;
-		light.enabled=true;
+		yield return new WaitForSeconds(0.2f);
 		for(int i =0; i<flickerAmount; i++)
 		{
+			light.intensity=0;
 			yield return new WaitForSeconds(0.2f);
-			light.enabled=false;
+			light.intensity=2;
 		}
 		light.enabled=true;
 	}
