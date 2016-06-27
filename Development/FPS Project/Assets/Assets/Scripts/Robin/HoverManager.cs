@@ -19,7 +19,7 @@ public class HoverManager : MonoBehaviour {
 		HoverSound();
 	}
 
-	public void HoverSound () {
+	void HoverSound () {
 		audio.Play();
 		audio.pitch = Random.Range(1f, 1.2f);
 	}

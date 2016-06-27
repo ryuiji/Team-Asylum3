@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
 
 	public GameObject loadingScreen;
+	public GameObject menu;
+	public GameObject player;
 
 	public GameObject options;
 	public GameObject credits;
@@ -17,12 +19,50 @@ public class UIManager : MonoBehaviour {
 
 	private bool showMenu = true;
 	private bool showCredits = true;
+	private bool canOpen = true;
 
 
 	void DisableAll () {
 		for(int i = 0; i < allOptions.Length; i++) {
 			allOptions[i].SetActive(false);
 		}
+	}
+
+	public void Resume () {
+		DisableAll();
+		menu.SetActive(false);
+		Time.timeScale = 1;
+		canOpen = true;
+		Cursor.visible = false;
+		EnableMovement();
+	}
+
+	void Update () {
+		if(Input.GetButtonDown("Cancel")) {
+			if(canOpen == true) {
+				EnableMenu();
+			} else if(Input.GetButtonDown("Cancel")) {
+				Resume();
+				EnableMovement();
+			}
+		}
+	}
+
+	void EnableMenu () {
+		Cursor.visible = true;
+		DisableMovement();
+		Time.timeScale = 0;
+		DisableAll();
+		menu.SetActive(true);
+		canOpen = false;
+	}
+
+	void EnableMovement () {
+		player.GetComponent<QuickieController>().canMove = true;
+	}
+
+	void DisableMovement () {
+		player.GetComponent<QuickieController>().canMove = false;
 	}
 
 	public void Back () {

@@ -12,7 +12,6 @@ public class Inspect : MonoBehaviour {
 	public GameObject weight;
 	public GameObject tip;
 	public GameObject description;
-	public GameObject menuManager;
 
 	private GameObject inspectObject;
 	private bool inspecting;
@@ -37,8 +36,7 @@ public class Inspect : MonoBehaviour {
 	void GetInput () {
 		if(inspecting == true) {
 			if(Input.GetButtonDown("Cancel")) {
-				menuManager.GetComponent<MenuManager>().canOpen = false;
-				DisableInspecting(hit);
+				DisableInspecting();
 			}
 		}
 	}
@@ -72,7 +70,6 @@ public class Inspect : MonoBehaviour {
 	}
 
 	void InspectObject (RaycastHit hit) {
-		menuManager.GetComponent<MenuManager>().canOpen = false;
 		Cursor.visible = true;
 		DisableMovement();
 		GetInfo();
@@ -83,13 +80,12 @@ public class Inspect : MonoBehaviour {
 		}
 	}
 
-	void DisableInspecting (RaycastHit hit) {
+	void DisableInspecting () {
 		inspecting = false;
 		Cursor.visible = false;
 		EnableMovement();
 		SetObjectToOldLocation();		
 		inspectCanvas.SetActive(false);
-		menuManager.GetComponent<MenuManager>().canOpen = true;
 	}
 
 	void SetObjectToTempLocation () {
@@ -117,6 +113,6 @@ public class Inspect : MonoBehaviour {
 	}
 
 	void EnableMovement () {
-		player.GetComponent<QuickieController>().canMove = false;
+		player.GetComponent<QuickieController>().canMove = true;
 	}
 }
