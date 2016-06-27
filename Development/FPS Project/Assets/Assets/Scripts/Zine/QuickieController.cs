@@ -34,9 +34,9 @@ public class QuickieController : MonoBehaviour
 
     void Start()
     {
-        canMove = true;
+        //canMove = true;
         //Cursor.lockState=CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     void CameraLook()
