@@ -2,17 +2,20 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class FlashLight : MonoBehaviour {
 	private bool canTurnOn;
 	private bool hasStarted;
 	public bool isOn;
 	public float batteryEnergy;
+	public GameObject batteryBar;
 	
 	void Update () {
 		GetInput();
 		CheckFlashLight();
 		DrainEnergy();
+		batteryBar.GetComponent<Slider>().value = batteryEnergy;
 	}
 
 	void CheckFlashLight () {

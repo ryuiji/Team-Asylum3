@@ -5,6 +5,7 @@ public class GeneratorLight : MonoBehaviour {
 
 	public Light light;
 	public int flickerAmount;
+	public float intensityToSet;
 
 	void Start()
 	{
@@ -18,7 +19,7 @@ public class GeneratorLight : MonoBehaviour {
 		{
 			light.intensity=0;
 			yield return new WaitForSeconds(0.2f);
-			light.intensity=2;
+			light.intensity=intensityToSet;
 		}
 		light.enabled=true;
 	}

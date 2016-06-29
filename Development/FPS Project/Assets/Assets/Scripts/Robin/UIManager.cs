@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +21,6 @@ public class UIManager : MonoBehaviour {
 	private bool showMenu = true;
 	private bool showCredits = true;
 	private bool canOpen = true;
-
 
 	void DisableAll () {
 		for(int i = 0; i < allOptions.Length; i++) {
