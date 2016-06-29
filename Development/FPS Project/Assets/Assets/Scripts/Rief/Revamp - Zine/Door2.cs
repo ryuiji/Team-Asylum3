@@ -14,11 +14,11 @@ public class Door2 : MonoBehaviour
         door=GetComponent<Animator>();
         if(open)
         {
-            UseDoor();
+            StartDoor();
         }
         if(!open)
         {
-        	UseDoor();
+        	StartDoor();
         }
     }
 
@@ -39,6 +39,8 @@ public class Door2 : MonoBehaviour
         }
     }
 
+
+
     public void UseDoor()
     {
         if(checkIfPlaying==false)
@@ -49,10 +51,17 @@ public class Door2 : MonoBehaviour
             StartCoroutine("DoorWait");
             open = !open;
         }
-        /*
+    }
 
-			UI UPDATE
-        */
+
+    public void StartDoor()
+    {
+        if(checkIfPlaying==false)
+        {
+            door.SetBool("OpenClose",open);
+            door.SetTrigger("Door");
+            open = !open;
+        }
     }
 
     IEnumerator DoorWait()

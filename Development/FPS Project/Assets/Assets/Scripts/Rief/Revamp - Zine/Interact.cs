@@ -36,6 +36,9 @@ public class Interact : MonoBehaviour
             case InteractableEnum.ElectricSwitch:
                 hit.transform.GetComponent<ElectricSwitch>().StartCoroutine("Activate");
                 break;
+            case InteractableEnum.DoorSwitch:
+                hit.transform.GetComponent<DoorSwitch>().Use();
+                break;
         }
     }
 }

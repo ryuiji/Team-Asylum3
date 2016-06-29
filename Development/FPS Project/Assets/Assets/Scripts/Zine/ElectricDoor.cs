@@ -9,24 +9,8 @@ public class ElectricDoor : MonoBehaviour
 	private bool mayOpen =true;
 	public AudioClip doorSound;
 	// Use this for initialization
-	void Start () 
-	{
 
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-
-		if(Input.GetKeyDown(KeyCode.B))
-		{
-			UseDoor();
-		}
-	
-	}
-
-	void UseDoor()
+	public void UseDoor()
 	{
 		if(generator.active && mayOpen)
 		{
