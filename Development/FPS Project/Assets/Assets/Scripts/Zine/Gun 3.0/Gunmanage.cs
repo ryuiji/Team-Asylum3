@@ -33,9 +33,10 @@ public class Gunmanage : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //StartCoroutine(SwitchWeapon(1));
+        StartCoroutine(SwitchWeapon(1));
         currAmountText.text="0";
-        looseAmountText.text="0";    
+        looseAmountText.text="0"; 
+        StartCoroutine(SwitchWeapon(0));
     }
 
     // Update is called once per frame
@@ -263,7 +264,6 @@ public class Gunmanage : MonoBehaviour
     {
         currAmountText.text=current.ToString("F0");
         looseAmountText.text=loose.ToString("F0");
-        gunName.text=name;
     }
 
     void ClearDelegates()

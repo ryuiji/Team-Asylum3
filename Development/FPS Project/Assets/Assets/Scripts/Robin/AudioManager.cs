@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(minWait, maxWait));
         int index = Random.Range(0, sounds2.Count);
         int sourceIndex = Random.Range(0, sources.Length);
-        sources[sourceIndex].PlayOneShot(sounds[index]);
+        sources[sourceIndex].PlayOneShot(sounds2[index]);
         sounds.Add(sounds2[index]);
         sounds2.RemoveAt(index);
         if (sounds2.Count == 0)
