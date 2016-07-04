@@ -1,0 +1,18 @@
+
+
+
+intro = 10 tm 429 (cinematic prefab)
+
+Ilde Unarmed = 10 tm 49
+
+
+Walk Unarmed = 67 tm 114
+
+Idle01 = 120 tm 145
+
+run01 = 150 tm 187
+
+attack01 = 192 tm 230
+
+
+Hit01 = 235 tm 252  
