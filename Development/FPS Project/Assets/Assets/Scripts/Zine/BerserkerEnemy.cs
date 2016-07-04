@@ -4,11 +4,18 @@ using System;
 
 public class BerserkerEnemy : EnemyAbstract
 {
+    public Animator anim;
+    public PlayerStats2 playStats;
+    public PBragdollController ragdoll;
+    public AudioClip[] attackSounds;
+    public AudioClip deathSound;
+    public AudioClip aggroSound;
+    public AudioSource pigSound;
+    public AudioClip playerHit;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed=moveSpeed;
-        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -20,8 +27,10 @@ public class BerserkerEnemy : EnemyAbstract
     {
         if (aggrod == false)
         {
+            print("no aggro");
             if (Vector3.Distance(transform.position, player.transform.position) < lengthOfSight)
             {
+                print("close");
                 if (CheckLineOfSight() == true)
                 {
                     print("Engaged");
@@ -55,6 +64,8 @@ public class BerserkerEnemy : EnemyAbstract
 
     public override void Aggro()
     {
+        pigSound.PlayOneShot(aggroSound);
+        anim.SetBool("Run",true);
         aggrod = true;
         agent.SetDestination(player.transform.position);
         agent.Resume();
@@ -62,7 +73,10 @@ public class BerserkerEnemy : EnemyAbstract
 
     public override IEnumerator Attack()
     {
-        player.GetComponent<MakeShiftHp>().TakeDamage(damage);
+        pigSound.PlayOneShot(playerHit);
+        pigSound.PlayOneShot(attackSounds[UnityEngine.Random.Range(0,attackSounds.Length)]);
+        anim.SetTrigger("Attack01");
+        playStats.TakeDamage(damage);
         audioSource.PlayOneShot(hitSound);
         StartCoroutine("AttackCoolDown");
         return null;
@@ -88,9 +102,11 @@ public class BerserkerEnemy : EnemyAbstract
 
     public override IEnumerator Death()
     {
-        //play anim
-        yield return new WaitForSeconds(1f);  //anim length
-        Destroy(this.gameObject);
+        pigSound.PlayOneShot(deathSound);
+        ragdoll.isDead=true;
+        yield return null;
+        DeAggro();
+        this.enabled=false;
     }
 
     public override void Roam()
@@ -101,6 +117,7 @@ public class BerserkerEnemy : EnemyAbstract
 
     public override void TakeDamage(int damage)
     {
+        anim.SetTrigger("Hit01");
         health -= damage;
         if (health <= 0)
         {
@@ -110,9 +127,11 @@ public class BerserkerEnemy : EnemyAbstract
 
     public override bool CheckLineOfSight()
     {
+        Debug.DrawLine(transform.position, player.transform.position, Color.red);
         if (Physics.Linecast(transform.position, player.transform.position, out hit))
         {
-            if (hit.transform.tag == "Player")
+            print(hit.transform.name);
+            if (hit.transform.tag == "Player" || hit.transform.tag == "PlayerPart")
             {
                 return true;
             }
