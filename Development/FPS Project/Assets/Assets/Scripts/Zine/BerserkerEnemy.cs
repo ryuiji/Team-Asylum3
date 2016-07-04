@@ -102,6 +102,7 @@ public class BerserkerEnemy : EnemyAbstract
 
     public override IEnumerator Death()
     {
+        GetComponent<Collider>().enabled=false;
         pigSound.PlayOneShot(deathSound);
         ragdoll.isDead=true;
         yield return null;

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AK47 : GunAbstract
 {
+    public RaycastHit hit;
     public void OnEnable()
     {
         fireRate = 60 / roundsPerMinute;
@@ -19,6 +20,14 @@ public class AK47 : GunAbstract
         audioSource.PlayOneShot(fire);
         bullet.GetComponent<Bullet>().damage=damage;
         IncreaseRecoil();
+        if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, 10))
+        {
+            print(hit.transform.name);
+            if (hit.transform.tag == "EnemyBodyPart")
+            {
+                hit.transform.GetComponent<EnemyBodyParts>().DoDamage(damage);
+            }
+        }
         Instantiate(bullet, firePoint.position + new Vector3(Random.Range(minRecoilX,maxRecoilX) * recoilAmount, Random.Range(minRecoilY, maxRecoilY) * recoilAmount, 0), firePoint.rotation);
         gunManager.UpdateUI(bulletsInClip, looseAmmo, gunName);
     }

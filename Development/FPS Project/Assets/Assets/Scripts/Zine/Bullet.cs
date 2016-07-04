@@ -10,14 +10,15 @@ public class Bullet : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Collision();
         transform.parent=null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
         Collision();
+        Move();
 
     }
 
